@@ -1,5 +1,3 @@
-export default snippets
-
 const snippets = {
     'java': {
         name: 'java',
@@ -443,3 +441,5 @@ const snippets = {
         ]
     },
 }
+
+export default snippets

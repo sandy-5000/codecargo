@@ -12,7 +12,7 @@
 
 @layer utilities {
     .m-container {
-        @apply mx-5 md:mx-16 lg:mx-32 xl:mx-40 2xl:mx-80
+        @apply mx-5 md:mx-16 lg:mx-32 xl:mx-40
     }
 
     .a-center {

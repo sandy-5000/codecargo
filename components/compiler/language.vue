@@ -10,7 +10,7 @@
         </div>
         <div class="p-5">
           <div class="grid grid-cols-4 gap-2">
-            <button v-for="(key, value) of languages" :id="key" @click="selectLanguage(key, value)">
+            <button v-for="(value, key) of languages" :id="key" @click="selectLanguage(key, value)">
               <p class="py-2 rounded-md cursor-pointer text-slate-50 hover:bg-gray-700 normal-case font-semibold">
                 {{ value }}</p>
             </button>

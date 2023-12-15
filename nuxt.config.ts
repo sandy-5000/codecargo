@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: [
-    '~/assets/css/main.css', 
+    '~/assets/css/main.css',
     '@fortawesome/fontawesome-svg-core/styles.css'
   ],
   postcss: {
@@ -12,4 +12,7 @@ export default defineNuxtConfig({
     },
   },
   modules: ['nuxt-icons'],
+  runtimeConfig: {
+    MONGODB: process.env.MONGODB
+  }
 })

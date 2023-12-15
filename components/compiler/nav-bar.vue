@@ -48,6 +48,7 @@
 const props = defineProps({
   page: String,
 })
+
 const options = useState('options', () => false)
 
 const user = useState('user', () => {

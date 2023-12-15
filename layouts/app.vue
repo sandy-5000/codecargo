@@ -6,13 +6,19 @@
 
   <body class="font-sans antialiased bg-gray-900">
     <div class="min-h-screen">
-      <NavBar></NavBar>
+      <NavBar :page="page"></NavBar>
       <header class="bg-gray-800 shadow">
         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-          <p class="text-slate-100 font-semibold">Home</p>
+          <p class="text-slate-100 font-semibold">{{header}}</p>
         </div>
       </header>
       <slot />
     </div>
   </body>
 </template>
+<script setup>
+const props = defineProps({
+  page: String,
+  header: String,
+})
+</script>

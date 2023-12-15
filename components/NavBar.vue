@@ -5,8 +5,8 @@
         <LogoGlow class="w-[55px]"></LogoGlow>
       </div>
       <div class="space-x-4 flex">
-        <NavLink :to="'/home'" :active="location.href == '/home'">Home</NavLink>
-        <NavLink :to="'/dashboard'" :active="location.href == '/dashboard'">Dashboard</NavLink>
+        <NavLink :to="'/home'" :active="page === 'home'">Home</NavLink>
+        <NavLink :to="'/dashboard'" :active="page === 'dashboard'">Dashboard</NavLink>
       </div>
       <div class="ml-auto v-center">
         <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -21,3 +21,8 @@
     </div>
   </nav>
 </template>
+<script setup>
+const props = defineProps({
+  page: String,
+})
+</script>

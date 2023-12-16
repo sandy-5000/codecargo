@@ -21,8 +21,6 @@
   </NuxtLayout>
 </template>
 <script setup>
-import snippets from "~/data/state.js"
-
 const layout = 'compiler'
 
 const modal = useState('modal', () => false)

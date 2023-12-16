@@ -11,6 +11,9 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  plugins: [
+    '~/plugins/fontawesome'
+  ],
   modules: ['nuxt-icons'],
   runtimeConfig: {
     MONGODB: process.env.MONGODB

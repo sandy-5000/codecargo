@@ -5,7 +5,7 @@
         <div class="bg-gray-800 overflow-hidden shadow-sm rounded-lg">
           <div class="p-6 text-gray-100">
             <h1 class="text-xl font-bold">
-              {{ "Hi Cassi!" }}
+              {{ __('Hi Cassi!') }}
             </h1>
             <p class="mt-4 text-sm">
               Welcome to <span class="text-md font-semibold logo-text cursor-pointer">DARKUBE</span> - Your Ultimate

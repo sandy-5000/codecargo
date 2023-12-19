@@ -5,4 +5,7 @@
 </template>
 <script setup>
 const layout = 'app'
+definePageMeta({
+    middleware: 'auth',
+})
 </script>

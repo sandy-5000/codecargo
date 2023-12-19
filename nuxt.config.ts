@@ -16,6 +16,7 @@ export default defineNuxtConfig({
   ],
   modules: ['nuxt-icons'],
   runtimeConfig: {
-    MONGODB: process.env.MONGODB
+    MONGODB: process.env.MONGODB,
+    SALT: process.env.SALT,
   }
 })

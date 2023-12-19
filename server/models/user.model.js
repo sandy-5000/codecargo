@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
         maxlength: 50,
         validate: {
             validator: function (v) {
-                return /^[a-zA-Z0-9 ]+$/.test(v)
+                return /^[a-zA-Z ]+$/.test(v)
             }
         }
     },
@@ -18,20 +18,28 @@ const userSchema = new mongoose.Schema({
         maxlength: 320,
         validate: {
             validator: function (v) {
-                // eslint-disable-next-line no-useless-escape
                 return /^[a-zA-Z0-9\.]{1,26}@gmail.com$/.test(v)
+            }
+        },
+    },
+    username: {
+        type: String,
+        required: true,
+        maxlength: 320,
+        validate: {
+            validator: function (v) {
+                return /^[a-zA-Z0-9_-]{5,320}$/.test(v)
             }
         },
     },
     passwd: {
         type: String,
         required: true,
-        minlength: 128,
-        maxlength: 128,
     },
 })
 
 userSchema.index({ email: 1 }, { unique: true })
+userSchema.index({ username: 1 }, { unique: true })
 userSchema.index({ name: 1 })
 
 export default mongoose.model('dkuser', userSchema)

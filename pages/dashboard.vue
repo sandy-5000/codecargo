@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout :name="layout" page="dashboard" header="Dashboard">
+  <NuxtLayout :name="layout" page="dashboard" header="Dashboard" title="Dashboard">
     <h1 class="text-slate-100 text-center mt-10">Dashboard</h1>
   </NuxtLayout>
 </template>

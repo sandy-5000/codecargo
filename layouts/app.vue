@@ -1,6 +1,6 @@
 <template>
   <Head>
-    <Title>Darkube</Title>
+    <Title>Darkube | {{ title || 'home' }}</Title>
     <Meta name="description" content="Welcome to DARKUBE - Your Ultimate Coding Hub!" />
   </Head>
 
@@ -20,5 +20,6 @@
 const props = defineProps({
   page: String,
   header: String,
+  title: String,
 })
 </script>

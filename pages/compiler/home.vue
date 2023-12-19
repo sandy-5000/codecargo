@@ -9,7 +9,7 @@
 }
 </style>
 <template>
-  <NuxtLayout :name="layout" page="home" header="Home">
+  <NuxtLayout :name="layout" page="home" header="Home" title="Home">
     <div class="w-full">
         <div class="h-center">
             <div class="mt-10">

@@ -1,6 +1,6 @@
 <template>
   <Head>
-    <Title>Darkube Compiler</Title>
+    <Title>Darkube Compiler | {{ title || 'Home' }}</Title>
     <Meta name="description" content="Welcome to DARKUBE Compiler - Your Ultimate Coding Hub!" />
   </Head>
 
@@ -19,5 +19,6 @@
 <script setup>
 const props = defineProps({
   page: String,
+  title: String,
 })
 </script>

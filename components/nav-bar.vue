@@ -1,4 +1,3 @@
-
 <template>
   <nav class="w-full bg-gray-800 border-b border-gray-700">
     <div class="m-container flex">
@@ -31,9 +30,9 @@
         <div v-if="!user.loggedIn" @click="toggleLogin" class="flex items-center">
           <button
             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-400 bg-gray-800 hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-            <a href="#"
+            <NuxtLink to="/login"
               class="font-semibold text-gray-400 hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
-              in</a>
+              in</NuxtLink>
           </button>
         </div>
       </div>

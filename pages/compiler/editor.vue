@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout :name="layout" page="editor" header="Home">
+  <NuxtLayout :name="layout" page="editor" header="Home" title="Editor">
     <compiler-language v-if="modal" :selectLanguage="(id, language) => {
       selected = language
       closeModal()

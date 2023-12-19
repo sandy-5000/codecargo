@@ -73,6 +73,4 @@ const languages = {
   'coffeescript': 'CoffeeScript',
   'ejs': 'EJS',
 }
-
-
 </script>

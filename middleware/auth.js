@@ -1,9 +1,7 @@
-const authorized = false
+const { session } = await useSession()
 
-export default defineNuxtRouteMiddleware((to, from) => {
-    if (authorized) {
-        return navigateTo(to.path)
-    } else {
+export default defineNuxtRouteMiddleware(async (to, from) => {
+    if (!session.value || !session.value._id) {
         return navigateTo('/login?redirect=' + to.path)
     }
 })

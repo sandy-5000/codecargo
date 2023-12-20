@@ -1,50 +1,152 @@
 <template>
   <NuxtLayout :name="layout">
-    <form method="POST" action="#">
+    <form @submit.prevent="registerSubmit">
+      <div class="flex space-x-2">
+        <!-- UserName -->
+        <div>
+          <ui-input-label for="username" :value="__('Username')" />
+          <ui-text-input :value="body.username" @update:value="(x) => changeValue('username', x)" id="username"
+            className="block mt-1 w-full" type="text" name="username" required autofocus />
+          <ui-input-error :messages="errors.username" className="mt-2" />
+        </div>
         <!-- Name -->
         <div>
-            <ui-input-label for="name" :value="__('Name')" />
-            <ui-text-input id="name" className="block mt-1 w-full" type="text" name="name" required autofocus autocomplete="name" />
-            <ui-input-error :messages="null" className="mt-2" />
+          <ui-input-label for="name" :value="__('Name')" />
+          <ui-text-input :value="body.name" @update:value="(x) => changeValue('name', x)" id="name" className="block mt-1 w-full"
+            type="text" name="name" required autofocus />
+          <ui-input-error :messages="null" className="mt-2" />
         </div>
+      </div>
+      <!-- Email Address -->
+      <div class="mt-2">
+        <ui-input-label for="email" :value="__('Email')" />
+        <ui-text-input :value="body.email" @update:value="(x) => changeValue('email', x)" id="email" className="block mt-1 w-full"
+          type="email" name="email" required />
+        <ui-input-error :messages="null" className="mt-2" />
+      </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <ui-input-label for="email" :value="__('Email')" />
-            <ui-text-input id="email" className="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
-            <ui-input-error :messages="null" className="mt-2" />
-        </div>
-
+      <div class="mt-2 flex space-x-2">
         <!-- Password -->
-        <div class="mt-4">
-            <ui-input-label for="password" :value="__('Password')" />
-            <ui-text-input id="password" className="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-            <ui-input-error :messages="null" className="mt-2" />
+        <div>
+          <ui-input-label for="password" :value="__('Password')" />
+          <ui-text-input :value="body.passwd" @update:value="(x) => changeValue('passwd', x)" id="password"
+            className="block mt-1 w-full" type="password" name="password" required />
+          <ui-input-error :messages="errors.passwd" className="mt-2" />
         </div>
-
         <!-- Confirm Password -->
-        <div class="mt-4">
-            <ui-input-label for="password_confirmation" :value="__('Confirm Password')" />
-            <ui-text-input id="password_confirmation" className="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-            <ui-input-error :messages="null" className="mt-2" />
+        <div>
+          <ui-input-label for="password_confirmation" :value="__('Confirm Password')" />
+          <ui-text-input :value="body.cpasswd" @update:value="(x) => changeValue('cpasswd', x)" id="password_confirmation"
+            className="block mt-1 w-full" type="password" name="password_confirmation" required />
+          <ui-input-error :messages="errors.cpasswd" className="mt-2" />
         </div>
+      </div>
 
-        <div class="flex items-center justify-between mt-4">
-            <NuxtLink to="/login" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                {{ __('Already registered?') }}
-            </NuxtLink>
-            <ui-button-primary class="ms-4">
-                {{ __('Register') }}
-            </ui-button-primary>
-        </div>
+      <div class="flex items-center justify-between mt-4">
+        <NuxtLink to="/login"
+          class="underline text-sm text-gray-400 hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-800">
+          {{ __('Already registered?') }}
+        </NuxtLink>
+        <ui-button-primary type="submit" class="ms-4">
+          {{ __('Register') }}
+        </ui-button-primary>
+      </div>
     </form>
   </NuxtLayout>
 </template>
 <script setup>
 const layout = 'auth'
+const {
+  session,
+  remove,
+  overwrite
+} = await useSession()
+const route = useRoute()
+const { redirect } = route.query
+if (session.value?._id) {
+  navigateTo('/home')
+}
+
+const body = useState('body', () => {
+  return {
+    username: '',
+    name: '',
+    email: '',
+    passwd: '',
+    cpasswd: '',
+  }
+})
+
+const errors = useState('errors', () => {
+  return {
+    username: null,
+    name: null,
+    email: null,
+    passwd: null,
+    cpasswd: null,
+  }
+})
+
+const changeValue = (key, value) => {
+  body.value[key] = value
+  validate()
+}
+
+const validate = () => {
+  errors.value = {
+    username: null,
+    name: null,
+    email: null,
+    passwd: null,
+    cpasswd: null,
+  }
+  let flag = true
+  if (body.value.username !== '' && body.value.username.length < 4) {
+    errors.value.username = 'Username contains atleast 4 characters'
+    flag = false
+  }
+  if (body.value.passwd !== '' && body.value.passwd.length < 8) {
+    errors.value.passwd = 'Password contains atleast 8 characters'
+    flag = false
+  }
+  if (body.value.cpasswd !== '' && body.value.passwd !== body.value.cpasswd) {
+    errors.value.cpasswd = 'Password didn\'t Match'
+    flag = false
+  }
+  return flag
+}
+
+const registerSubmit = async () => {
+  if (!validate()) {
+    return
+  }
+  const { username, name, email, passwd } = body.value
+  body.value = {
+    username: '',
+    name: '',
+    email: '',
+    passwd: '',
+    cpasswd: ''
+  }
+  if (session.value?._id) {
+    await remove()
+  }
+  try {
+    const response = await $fetch('/api/user/register', {
+      method: 'POST',
+      body: {
+        username, name, passwd, email
+      }
+    })
+    await overwrite(response)
+    console.log(session.value)
+    if (redirect) {
+      navigateTo(redirect)
+    } else {
+      navigateTo('/home')
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
 </script>

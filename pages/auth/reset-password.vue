@@ -7,16 +7,14 @@
       <!-- Email Address -->
       <div>
         <ui-input-label for="email" :value="__('Email')" />
-        <ui-text-input id="email" class="block mt-1 w-full" type="email" name="email" required autofocus
-          autocomplete="username" />
+        <ui-text-input id="email" class="block mt-1 w-full" type="email" name="email" required autofocus />
         <ui-input-error :messages="null" class="mt-2" />
       </div>
 
       <!-- Password -->
       <div class="mt-4">
         <ui-input-label for="password" :value="__('Password')" />
-        <ui-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
-          autocomplete="new-password" />
+        <ui-text-input id="password" class="block mt-1 w-full" type="password" name="password" required />
         <ui-input-error :messages="null" class="mt-2" />
       </div>
 
@@ -24,7 +22,7 @@
       <div class="mt-4">
         <ui-input-label for="password_confirmation" :value="__('Confirm Password')" />
         <ui-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation"
-          required autocomplete="new-password" />
+          required />
         <ui-input-error :messages="null" class="mt-2" />
       </div>
 

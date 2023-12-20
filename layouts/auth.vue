@@ -9,7 +9,7 @@
       <div style="width: min(100%, 500px);" class="min-h-screen flex flex-col justify-center pt-6 px-3 sm:pt-0">
         <div class="flex flex-col">
           <NuxtLink to="/home" class="flex justify-start px-3">
-            <ui-logo class="h-16 mr-2" />
+            <ui-logo-glow class="w-16 mr-2" />
             <div class="a-center">
               <h1 class="text-2xl block font-normal logo-text">DARKUBE</h1>
             </div>

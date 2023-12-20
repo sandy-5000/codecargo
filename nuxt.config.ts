@@ -14,7 +14,10 @@ export default defineNuxtConfig({
   plugins: [
     '~/plugins/fontawesome'
   ],
-  modules: ['nuxt-icons'],
+  modules: [
+    'nuxt-icons',
+    '@sidebase/nuxt-session',
+  ],
   runtimeConfig: {
     MONGODB: process.env.MONGODB,
     SALT: process.env.SALT,

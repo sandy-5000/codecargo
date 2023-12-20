@@ -1,20 +1,25 @@
 import DKUser from '~/server/models/user.model'
 
 export default defineEventHandler(async (event) => {
-    const req = event.node.req
-    const res = event.node.res
-    res.setHeader('Content-Type', 'application/json')
-    if (req.method === 'POST') {
-        const body = await readBody(event)
-        if (!body.username || !body.passwd) {
-            res.statusCode = 400
-            return res.end(str({ error: 'Missing parameters' }))
+    try {
+        const req = event.node.req
+        const res = event.node.res
+        res.setHeader('Content-Type', 'application/json')
+        if (req.method === 'POST') {
+            const body = await readBody(event)
+            if (!body.username || !body.passwd) {
+                res.statusCode = 400
+                return res.end(str({ error: 'Missing parameters' }))
+            }
+            const user = await post(body)
+            // $session.user = user
+            res.end(str(user))
+        } else {
+            res.statusCode = 405
+            return res.end(str({ error: 'Unsupported method' }))
         }
-        const data = await post(body)
-        res.end(str(data))
-    } else {
-        res.statusCode = 405
-        return res.end(str({ error: 'Unsupported method' }))
+    } catch (e) {
+        return res.end(str({ error: e }))
     }
 })
 

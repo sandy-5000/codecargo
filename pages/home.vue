@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout :name="layout" page="home" header="Home" title="Home">
     <div class="py-12">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="mx-2 max-w-7xl md:mx-auto sm:px-6 lg:px-8">
         <div class="bg-gray-800 overflow-hidden shadow-sm rounded-lg">
           <div class="p-6 text-gray-100">
             <h1 class="text-xl font-bold">

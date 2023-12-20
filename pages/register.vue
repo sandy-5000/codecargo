@@ -138,6 +138,13 @@ const registerSubmit = async () => {
         username, name, passwd, email
       }
     })
+    if (response.error) {
+      errors.value.username = response.error
+      setTimeout(() => {
+        errors.value.username = null
+      }, 3000)
+      return
+    }
     await overwrite(response)
     console.log(session.value)
     if (redirect) {

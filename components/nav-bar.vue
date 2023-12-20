@@ -2,14 +2,14 @@
 .nav-options-close {
   z-index: -1;
   opacity: 0;
-  transform: translateY(-40%);
+  transform: scale(0.9) translateY(-20%);
   transition: 0.2s;
 }
 
 .nav-options-open {
   z-index: 2;
   opacity: 1;
-  transform: translateY(0);
+  transform: scale(1) translateY(0);
 }
 </style>
 <template>

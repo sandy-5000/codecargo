@@ -1,28 +1,75 @@
+<style scoped>
+.container {
+  position: relative;
+  display: block;
+  width: 2rem;
+  height: 1rem;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  background-color: #111827;
+  border-radius: 20px;
+  transition: all 150ms ease;
+}
+
+.circle {
+  width: 1rem;
+  height: 1rem;
+  position: absolute;
+  background-color: #334155;
+  border-radius: 100%;
+  outline: 1px solid #111827;
+  left: 0;
+  top: 0;
+  transition: all 150ms ease;
+}
+
+.checkbox {
+  display: none;
+}
+
+.checkbox:checked~.background {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
+  transition: all 250ms ease;
+}
+
+.checkbox:checked~.circle {
+  transform: translateX(100%);
+  transition: all 250ms ease;
+  outline-color: #4f46e5;
+  background-color: #111827;
+}
+</style>
 <template>
   <NuxtLayout :name="layout">
     <form @submit.prevent="loginSubmit">
       <!-- Email Address -->
       <div>
         <ui-input-label for="email" :value="__('Username')" />
-        <ui-text-input :value="body.username" @update:value="(x) => body.username = x" id="username"
+        <ui-text-input :value="body.username" @update:value="(x) => changeValue('username', x)" id="username"
           className="block mt-1 w-full" type="text" name="email" :required="true" autofocus="true" />
-        <ui-input-error :messages="null" className="mt-2" />
+        <ui-input-error :messages="errors.username" className="mt-2" />
       </div>
 
       <!-- Password -->
       <div class="mt-4">
         <ui-input-label for="password" :value="__('Password')" />
-        <ui-text-input :value="body.passwd" @update:value="(x) => body.passwd = x" id="password"
+        <ui-text-input :value="body.passwd" @update:value="(x) => changeValue('passwd', x)" id="password"
           className="block mt-1 w-full" type="password" name="password" :required="true" />
-        <ui-input-error :messages="null" className="mt-2" />
+        <ui-input-error :messages="errors.passwd" className="mt-2" />
       </div>
 
       <!-- Remember Me -->
       <div class="mt-4 flex justify-between">
         <label for="remember_me" class="inline-flex items-center">
-          <input id="remember_me" type="checkbox"
-            class="rounded bg-gray-900 border-gray-700 outline-none text-indigo-600 shadow-sm focus:ring-indigo-600 focus:ring-offset-gray-800"
-            name="remember">
+          <label for="remember_me" class="container">
+            <input class="checkbox" id="remember_me" type="checkbox" />
+            <div class="background"></div>
+            <div class="circle"></div>
+          </label>
           <span class="ms-2 text-sm text-gray-400">{{ __('Remember me') }}</span>
         </label>
         <NuxtLink to="/auth/forgot-password"
@@ -64,6 +111,17 @@ const body = useState('body', () => {
   }
 })
 
+const errors = useState('errors', () => {
+  return {
+    username: null,
+    passwd: null,
+  }
+})
+
+const changeValue = (key, value) => {
+  body.value[key] = value
+}
+
 const loginSubmit = async () => {
   const { username, passwd } = body.value
   body.value = { username: '', passwd: '' }
@@ -77,6 +135,13 @@ const loginSubmit = async () => {
         username, passwd
       }
     })
+    if (response.error) {
+      errors.value.username = response.error
+      setTimeout(() => {
+        errors.value.username = null
+      }, 3000)
+      return
+    }
     await overwrite(response)
     console.log(session.value)
     if (redirect) {

@@ -28,7 +28,7 @@ async function post({ username, passwd }) {
     const user = await DKUser.findOne({ username, passwd: hash }, { passwd: 0 })
     if (user === null) {
         return {
-            error: 'User Not Found'
+            error: ['User not Found or', 'Username to password Incorrect']
         }
     }
     return user

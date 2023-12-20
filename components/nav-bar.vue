@@ -14,7 +14,7 @@
 </style>
 <template>
   <nav class="w-full bg-gray-800 border-b border-gray-700">
-    <div class="m-container flex">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex">
       <div class="v-center mr-10">
         <ui-logo-glow class="w-[55px]"></ui-logo-glow>
       </div>

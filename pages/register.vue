@@ -71,12 +71,10 @@ if (session.value?._id) {
 }
 
 const debounce = function (f, interval = 500) {
-  let timer = null
+  let instance = null
   return (...args) => {
-    if (timer) {
-      clearTimeout(timer)
-    }
-    setTimeout(() => {
+    clearTimeout(instance)
+    instance = setTimeout(() => {
       f(...args)
     }, interval)
   }

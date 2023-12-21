@@ -16,7 +16,9 @@
   <nav class="w-full bg-gray-800 border-b border-gray-700">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex">
       <div class="v-center mr-10">
-        <ui-logo-glow class="w-[55px]"></ui-logo-glow>
+        <NuxtLink to="/home">
+          <ui-logo-glow class="w-[55px]"></ui-logo-glow>
+        </NuxtLink>
       </div>
       <div class="space-x-4 flex">
         <ui-nav-link :to="'/home'" :active="page === 'home'">Home</ui-nav-link>

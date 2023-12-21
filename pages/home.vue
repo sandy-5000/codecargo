@@ -5,7 +5,7 @@
         <div class="bg-gray-800 overflow-hidden shadow-sm rounded-lg">
           <div class="p-6 text-gray-100">
             <h1 class="text-xl font-bold">
-              {{ __('Hi Cassi!') }}
+              {{ `Hi ${name}!` }}
             </h1>
             <p class="mt-4 text-sm">
               Welcome to <span class="text-md font-semibold logo-text cursor-pointer">DARKUBE</span> - Your Ultimate
@@ -73,8 +73,11 @@
           </div>
         </div>
       </div>
-  </div>
-</NuxtLayout></template>
+    </div>
+  </NuxtLayout>
+</template>
 <script setup>
 const layout = 'app'
+const { session } = await useSession()
+const name = session.value && session.value._id ? session.value.name : 'User'
 </script>

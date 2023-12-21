@@ -101,15 +101,15 @@ const validate = () => {
     cpasswd: null,
   }
   let flag = true
-  if (body.value.username !== '' && body.value.username.length < 4) {
+  if (body.value.username && body.value.username.length < 4) {
     errors.value.username = 'Username contains atleast 4 characters'
     flag = false
   }
-  if (body.value.passwd !== '' && body.value.passwd.length < 8) {
+  if (body.value.passwd && body.value.passwd.length < 8) {
     errors.value.passwd = 'Password contains atleast 8 characters'
     flag = false
   }
-  if (body.value.cpasswd !== '' && body.value.passwd !== body.value.cpasswd) {
+  if (body.value.cpasswd && body.value.passwd !== body.value.cpasswd) {
     errors.value.cpasswd = 'Password didn\'t Match'
     flag = false
   }

@@ -84,9 +84,12 @@
           {{ __('Not registered?') }}
         </NuxtLink>
 
-        <ui-button-primary class="ms-3" type="submit">
-          {{ __('Log in') }}
+        <ui-button-primary v-if="!loading" class="ms-3" type="submit">
+          Log in
         </ui-button-primary>
+        <ui-button-loading v-if="loading" class="ms-3">
+          Logging in...
+        </ui-button-loading>
       </div>
     </form>
   </NuxtLayout>
@@ -118,6 +121,8 @@ const errors = useState('errors', () => {
   }
 })
 
+const loading = useState('loading', () => false)
+
 const changeValue = (key, value) => {
   body.value[key] = value
 }
@@ -128,6 +133,7 @@ const loginSubmit = async () => {
   if (session.value?._id) {
     await remove()
   }
+  loading.value = true
   try {
     const response = await $fetch('/api/user/login', {
       method: 'POST',
@@ -150,6 +156,8 @@ const loginSubmit = async () => {
     }
   } catch (e) {
     console.log(e)
+  } finally {
+    loading.value = false
   }
 }
 </script>

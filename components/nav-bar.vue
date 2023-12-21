@@ -14,8 +14,8 @@
 </style>
 <template>
   <nav class="w-full bg-gray-800 border-b border-gray-700">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex">
-      <div class="v-center mr-10">
+    <div class="max-w-7xl mx-3 md:mx-auto sm:px-6 lg:px-8 flex">
+      <div class="v-center mr-5 md:mr-10">
         <NuxtLink to="/home">
           <ui-logo-glow class="w-[55px]"></ui-logo-glow>
         </NuxtLink>
@@ -26,7 +26,7 @@
       </div>
       <div class="ml-auto v-center">
         <div v-if="session._id" class="flex items-center">
-          <div class="relative w-36 md:w-48">
+          <div class="relative w-32 md:w-48">
             <div class="flex justify-end">
               <button @click="toggleOptions"
                 class="options-button a-center inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-400 bg-gray-800 hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">

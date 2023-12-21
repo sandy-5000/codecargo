@@ -12,16 +12,16 @@
         <!-- Name -->
         <div>
           <ui-input-label for="name" :value="__('Name')" />
-          <ui-text-input :value="body.name" @update:value="(x) => changeValue('name', x)" id="name" className="block mt-1 w-full"
-            type="text" name="name" required autofocus />
+          <ui-text-input :value="body.name" @update:value="(x) => changeValue('name', x)" id="name"
+            className="block mt-1 w-full" type="text" name="name" required autofocus />
           <ui-input-error :messages="null" className="mt-2" />
         </div>
       </div>
       <!-- Email Address -->
       <div class="mt-2">
         <ui-input-label for="email" :value="__('Email')" />
-        <ui-text-input :value="body.email" @update:value="(x) => changeValue('email', x)" id="email" className="block mt-1 w-full"
-          type="email" name="email" required />
+        <ui-text-input :value="body.email" @update:value="(x) => changeValue('email', x)" id="email"
+          className="block mt-1 w-full" type="email" name="email" required />
         <ui-input-error :messages="null" className="mt-2" />
       </div>
 
@@ -47,9 +47,12 @@
           class="underline text-sm text-gray-400 hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-800">
           {{ __('Already registered?') }}
         </NuxtLink>
-        <ui-button-primary type="submit" class="ms-4">
-          {{ __('Register') }}
+        <ui-button-primary v-if="!loading" type="submit" class="ms-4">
+          Register
         </ui-button-primary>
+        <ui-button-loading v-if="loading" class="ms-4">
+          Creating...
+        </ui-button-loading>
       </div>
     </form>
   </NuxtLayout>
@@ -86,6 +89,8 @@ const errors = useState('errors', () => {
     cpasswd: null,
   }
 })
+
+const loading = useState('loading', () => false)
 
 const changeValue = (key, value) => {
   body.value[key] = value
@@ -131,6 +136,7 @@ const registerSubmit = async () => {
   if (session.value?._id) {
     await remove()
   }
+  loading.value = true
   try {
     const response = await $fetch('/api/user/register', {
       method: 'POST',
@@ -146,7 +152,6 @@ const registerSubmit = async () => {
       return
     }
     await overwrite(response)
-    console.log(session.value)
     if (redirect) {
       navigateTo(redirect)
     } else {
@@ -154,6 +159,8 @@ const registerSubmit = async () => {
     }
   } catch (e) {
     console.log(e)
+  } finally {
+    loading.value = false
   }
 }
 </script>

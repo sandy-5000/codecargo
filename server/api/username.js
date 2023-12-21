@@ -7,12 +7,12 @@ export default defineEventHandler(async (event) => {
         res.setHeader('Content-Type', 'application/json')
         if (req.method === 'POST') {
             const body = await readBody(event)
-            if (!body.username || !body.passwd) {
+            if (!body.username) {
                 res.statusCode = 400
                 return res.end(str({ error: 'Missing parameters' }))
             }
-            const user = await post(body)
-            res.end(str(user))
+            const response = await get(body)
+            res.end(str(response))
         } else {
             res.statusCode = 405
             return res.end(str({ error: 'Unsupported method' }))
@@ -22,13 +22,7 @@ export default defineEventHandler(async (event) => {
     }
 })
 
-async function post({ username, passwd }) {
-    const hash = await Hash(username + passwd + config.SALT)
-    const user = await DKUser.findOne({ username, passwd: hash }, { passwd: 0 })
-    if (user === null) {
-        return {
-            error: ['User not Found or', 'Username to password Incorrect']
-        }
-    }
-    return user
+async function get({ username }) {
+    const user = await DKUser.findOne({ username }, { username: 1 })
+    return user ? { status: 'ALREADY_TAKEN' } : { status: 'VALID' }
 }

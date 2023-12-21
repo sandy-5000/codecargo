@@ -70,6 +70,35 @@ if (session.value?._id) {
   navigateTo('/home')
 }
 
+const debounce = function (f, interval = 500) {
+  let timer = null
+  return (...args) => {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    setTimeout(() => {
+      f(...args)
+    }, interval)
+  }
+}
+
+const checkUsername = debounce(async () => {
+  if (!body.value.username || body.value.username.length < 4) {
+    return
+  }
+  try {
+    const response = await $fetch('/api/username', {
+      method: 'POST',
+      body: {
+        username: body.value.username
+      }
+    })
+    if (response.status === 'ALREADY_TAKEN') {
+      errors.value.username = 'Username Already Taken'
+    }
+  } catch { }
+}, 2000)
+
 const body = useState('body', () => {
   return {
     username: '',
@@ -94,6 +123,9 @@ const loading = useState('loading', () => false)
 
 const changeValue = (key, value) => {
   body.value[key] = value
+  if (key === 'username') {
+    checkUsername()
+  }
   validate()
 }
 

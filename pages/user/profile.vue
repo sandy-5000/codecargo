@@ -13,18 +13,18 @@
                   {{ __("Update your account's profile information and email address.") }}
                 </p>
               </header>
-              <form method="post" action="#" class="mt-6 space-y-6">
+              <form @submit.prevent="handleProfileUpdate" class="mt-6 space-y-6">
                 <div>
                   <ui-input-label for="name" :value="__('Name')" />
-                  <ui-text-input id="name" :value="info.profile.name" name="name" type="text" class="mt-1 block w-full"
-                    required autofocus />
+                  <ui-text-input id="name" :value="info.profile.name" @update:value="(x) => info.profile.name = x"
+                    name="name" type="text" class="mt-1 block w-full" required autofocus />
                   <ui-input-error class="mt-2" :messages="null" />
                 </div>
 
                 <div>
                   <ui-input-label for="email" :value="__('Email')" />
-                  <ui-text-input id="email" :value="info.profile.email" name="email" type="email"
-                    class="mt-1 block w-full" required />
+                  <ui-text-input id="email" :value="info.profile.email" @update:value="(x) => info.profile.email = x"
+                    name="email" type="email" class="mt-1 block w-full" required />
                   <ui-input-error class="mt-2" :messages="null" />
 
                   <div v-if="true">
@@ -43,9 +43,9 @@
                 </div>
 
                 <div class="flex items-center gap-4">
-                  <ui-button-primary>{{ __('Save') }}</ui-button-primary>
-                  <p v-if="show.profileUpdated" class="text-sm text-gray-400">{{
-                    __('Saved.') }}</p>
+                  <ui-button-primary type="submit" v-if="!loading.profileUpdate">Save</ui-button-primary>
+                  <ui-button-loading v-if="loading.profileUpdate">Updating...</ui-button-loading>
+                  <p v-if="show.profileUpdated" class="text-sm text-gray-400">{{ show.profileUpdated }}</p>
                 </div>
               </form>
             </section>
@@ -65,31 +65,34 @@
                 </p>
               </header>
 
-              <form method="post" action="#" class="mt-6 space-y-6">
+              <form @submit.prevent="handlePasswordUpdate" class="mt-6 space-y-6">
                 <div>
                   <ui-input-label for="current_password" :value="__('Current Password')" />
-                  <ui-text-input id="current_password" :value="info.passwd.current" name="current_password"
-                    type="password" class="mt-1 block w-full" />
-                  <ui-input-error :messages="null" class="mt-2" />
-                </div>
-
-                <div>
-                  <ui-input-label for="password" :value="__('New Password')" />
-                  <ui-text-input id="password" :value="info.passwd.updated" name="password" type="password"
+                  <ui-text-input id="current_password" :value="info.passwd.current"
+                    @update:value="(x) => info.passwd.current = x" name="current_password" type="password"
                     class="mt-1 block w-full" />
                   <ui-input-error :messages="null" class="mt-2" />
                 </div>
 
                 <div>
+                  <ui-input-label for="password" :value="__('New Password')" />
+                  <ui-text-input id="password" :value="info.passwd.updated" @update:value="(x) => info.passwd.updated = x"
+                    name="password" type="password" class="mt-1 block w-full" />
+                  <ui-input-error :messages="null" class="mt-2" />
+                </div>
+
+                <div>
                   <ui-input-label for="password_confirmation" :value="__('Confirm Password')" />
-                  <ui-text-input id="password_confirmation" :value="info.passwd.confirm" name="password_confirmation"
-                    type="password" class="mt-1 block w-full" />
+                  <ui-text-input id="password_confirmation" :value="info.passwd.confirm"
+                    @update:value="(x) => info.passwd.confirm = x" name="password_confirmation" type="password"
+                    class="mt-1 block w-full" />
                   <ui-input-error :messages="null" class="mt-2" />
                 </div>
 
                 <div class="flex items-center gap-4">
-                  <ui-button-primary>{{ __('Save') }}</ui-button-primary>
-                  <p v-if="show.passwordUpdated" class="text-sm text-gray-400">{{ __('Saved.') }}</p>
+                  <ui-button-primary type="submit" v-if="!loading.passwordUpdate">Save</ui-button-primary>
+                  <ui-button-loading v-if="loading.passwordUpdate">Updating...</ui-button-loading>
+                  <p v-if="show.passwordUpdated" class="text-sm text-gray-400">{{ show.passwordUpdated }}</p>
                 </div>
               </form>
             </section>
@@ -118,11 +121,18 @@
 </template>
 <script setup>
 const layout = 'app'
-const { session } = await useSession()
+const { session, update } = await useSession()
 const route = useRoute()
 if (!session.value || !session.value._id) {
   navigateTo(`/login?redirect=${route.path}`)
 }
+
+const defaultInfo = useState('defaultInfo', () => {
+  return {
+    name: session.value.name,
+    email: session.value.email,
+  }
+})
 
 const info = useState('info', () => {
   return {
@@ -140,8 +150,98 @@ const info = useState('info', () => {
 
 const show = useState('show', () => {
   return {
-    profileUpdated: false,
-    passwordUpdated: false,
+    profileUpdated: '',
+    passwordUpdated: '',
   }
 })
+
+const profileUpdated = (message) => {
+  show.value.profileUpdated = message || 'Profile updated.'
+  setTimeout(() => {
+    show.value.profileUpdated = ''
+  }, 5000)
+}
+
+const passwordUpdated = (message) => {
+  show.value.passwordUpdated = message || 'Password updated.'
+  setTimeout(() => {
+    show.value.passwordUpdated = ''
+  }, 5000)
+}
+
+const loading = useState('loading', () => {
+  return {
+    profileUpdate: false,
+    passwordUpdate: false,
+  }
+})
+
+const handleProfileUpdate = async () => {
+  const { name, email } = info.value.profile
+  info.value.profile = { name: '', email: '' }
+  if (!session.value || !session.value._id) {
+    navigateTo(`/login?redirect=${route.path}`)
+    return
+  }
+  loading.value.profileUpdate = true
+  try {
+    const response = await $fetch('/api/user/profile', {
+      method: 'PATCH',
+      body: {
+        update: 'profile',
+        _id: session.value._id,
+        name, email
+      }
+    })
+    if (!response.error) {
+      await update({
+        name: name || defaultInfo.value.name,
+        email: email || defaultInfo.value.email,
+      })
+      defaultInfo.value = {
+        name: session.value.name,
+        email: session.value.email,
+      }
+    }
+    info.value.profile = {
+      name: defaultInfo.value.name,
+      email: defaultInfo.value.email,
+    }
+    profileUpdated(response.error || response.status)
+  } catch (e) {
+    profileUpdated('Update Failed')
+  } finally {
+    loading.value.profileUpdate = false
+  }
+}
+
+const handlePasswordUpdate = async () => {
+  const { current, updated, confirm } = info.value.passwd
+  info.value.passwd = { current: '', updated: '', confirm: '' }
+  if (!session.value || !session.value._id) {
+    navigateTo(`/login?redirect=${route.path}`)
+    return
+  }
+  if (updated !== confirm) {
+    passwordUpdated('Password did\'t match')
+    return
+  }
+  loading.value.passwordUpdate = true
+  try {
+    const response = await $fetch('/api/user/profile', {
+      method: 'PATCH',
+      body: {
+        update: 'passwd',
+        _id: session.value._id,
+        passwd: current,
+        npasswd: updated
+      }
+    })
+    passwordUpdated(response.error || response.status)
+  } catch (e) {
+    passwordUpdated('Update Failed')
+  } finally {
+    loading.value.passwordUpdate = false
+  }
+}
 </script>

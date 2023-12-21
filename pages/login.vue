@@ -44,7 +44,7 @@
 }
 </style>
 <template>
-  <NuxtLayout :name="layout">
+  <NuxtLayout :name="layout" title="login">
     <form @submit.prevent="loginSubmit">
       <!-- Email Address -->
       <div>
@@ -143,7 +143,6 @@ const loginSubmit = async () => {
       return
     }
     await overwrite(response)
-    console.log(session.value)
     if (redirect) {
       navigateTo(redirect)
     } else {

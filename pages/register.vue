@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout :name="layout">
+  <NuxtLayout :name="layout" title="register">
     <form @submit.prevent="registerSubmit">
       <div class="flex space-x-2">
         <!-- UserName -->

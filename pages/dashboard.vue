@@ -19,9 +19,6 @@
   </NuxtLayout>
 </template>
 <script setup>
-// definePageMeta({
-//   middleware: 'auth',
-// })
 const layout = 'app'
 const { session } = await useSession()
 const route = useRoute()

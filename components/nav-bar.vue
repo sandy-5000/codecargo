@@ -52,7 +52,7 @@
         <div v-if="!session._id" class="flex items-center">
           <button
             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-400 bg-gray-800 hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-            <NuxtLink to="/login"
+            <NuxtLink :to="`/login?redirect=${route.path}`"
               class="font-semibold text-gray-400 hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
               Log
               in</NuxtLink>

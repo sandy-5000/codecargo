@@ -28,7 +28,8 @@
                   <font-awesome-icon style="color: #f1f5f9" class="text-sm" icon="fa-solid fa-clone" />
                 </div>
               </div>
-              <ui-text-input className="block mt-1 w-full" :value="inputChannelId" @update:value="(x) => inputChannelId = x" :disabled="!!channelId" />
+              <ui-text-input className="block mt-1 w-full" :value="inputChannelId"
+                @update:value="(x) => inputChannelId = x" :disabled="!!channelId" />
             </div>
             <span v-if="copied" class="text-gray-200 text-xs">Copied to clipboard.</span>
             <div class="mt-1 flex justify-end md:justify-start">
@@ -42,7 +43,7 @@
           </div>
           <div class="flex justify-end md:block">
             <ui-switch id="sync_code" :value="codeSync" @update:checked="(x) => codeSync = x"
-              prompt="Synchronize code"></ui-switch>
+              prompt="Synchronize Code"></ui-switch>
           </div>
         </div>
         <div class="a-center my-5">
@@ -57,7 +58,14 @@
   </NuxtLayout>
 </template>
 <script setup>
-import { validate } from 'uuid'
+import { validate, v4 as uuidv4 } from 'uuid'
+import io from 'socket.io-client'
+
+const user_id = uuidv4()
+
+const socket = io({
+  path: '/api/socket.io/',
+})
 
 const layout = 'compiler'
 
@@ -99,10 +107,25 @@ const swiftLanguage = (lang) => {
   }, "*")
 }
 
+socket.on('multicast', ({ sender_id, language, files }) => {
+  if (sender_id == user_id) {
+    return
+  }
+  editor.contentWindow.postMessage({
+    eventType: 'populateCode',
+    language: language,
+    files: files,
+  }, "*")
+})
+
 const handleData = (e) => {
+  const channel_id = localStorage.getItem('channel_id')
   if (e.data && e.data.language) {
     const { language, files } = e.data
     localStorage.setItem(e.data.language, JSON.stringify({ language, files }))
+    if (channel_id) {
+      socket.emit('code-change', { channel_id, user_id, language, files })
+    }
   }
 }
 
@@ -137,10 +160,14 @@ const createChannel = async () => {
       if (!validate(response.channel_id)) {
         return
       }
-      copyChannel(response.channel_id)
+      socket.emit('connect-channel', {
+        channel_id: response.channel_id,
+        user_id,
+      })
       localStorage.setItem('channel_id', response.channel_id)
       channelId.value = response.channel_id
       inputChannelId.value = response.channel_id
+      copyChannel(response.channel_id)
     }
   } catch (e) {
     console.log(e)
@@ -172,6 +199,10 @@ const joinChannel = async () => {
       if (!validate(response.channel_id)) {
         return
       }
+      socket.emit('connect-channel', {
+        channel_id: response.channel_id,
+        user_id,
+      })
       localStorage.setItem('channel_id', response.channel_id)
       channelId.value = response.channel_id
       inputChannelId.value = response.channel_id

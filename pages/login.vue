@@ -97,6 +97,7 @@ const loginSubmit = async () => {
       return
     }
     await overwrite(response)
+    loading.value = false
     if (redirect) {
       navigateTo(redirect)
     } else {

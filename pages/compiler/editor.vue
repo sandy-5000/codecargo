@@ -17,7 +17,7 @@
             src="https://onecompiler.com/embed?hideTitle=true&codeChangeEvent=true&listenToEvents=true&hideNew=true&hideLanguageSelection=true"></iframe>
         </div>
       </div>
-      <div v-if="true">
+      <div v-if="session._id">
         <div class="pb-5 px-5 flex flex-col-reverse md:flex-row justify-between">
           <div class="px-4 mt-3 md:mt-0">
             <ui-input-label value="Channel ID" />
@@ -61,7 +61,11 @@
 import { validate, v4 as uuidv4 } from 'uuid'
 import io from 'socket.io-client'
 
-const user_id = uuidv4()
+const { session } = await useSession()
+
+console.log(session.value)
+
+let user_id = null
 
 const socket = io({
   path: '/api/socket.io/',
@@ -105,12 +109,17 @@ const swiftLanguage = (lang) => {
     language: x.language,
     files: x.files,
   }, "*")
+  const channel_id = localStorage.getItem('channel_id')
+  if (channel_id && codeSync.value) {
+    socket.emit('code-change', { channel_id, user_id, language: x.language, files: x.files })
+  }
 }
 
 socket.on('multicast', ({ sender_id, language, files }) => {
-  if (sender_id == user_id) {
+  if (sender_id == user_id || !codeSync.value) {
     return
   }
+  selected.value = language
   editor.contentWindow.postMessage({
     eventType: 'populateCode',
     language: language,
@@ -123,7 +132,7 @@ const handleData = (e) => {
   if (e.data && e.data.language) {
     const { language, files } = e.data
     localStorage.setItem(e.data.language, JSON.stringify({ language, files }))
-    if (channel_id) {
+    if (channel_id && codeSync.value) {
       socket.emit('code-change', { channel_id, user_id, language, files })
     }
   }
@@ -155,7 +164,6 @@ const createChannel = async () => {
         _id: 'sandy-blaze'
       }
     })
-    console.log(response)
     if (response.channel_id) {
       if (!validate(response.channel_id)) {
         return
@@ -190,11 +198,10 @@ const joinChannel = async () => {
     const response = await $fetch('/api/channel/join', {
       method: 'POST',
       body: {
-        _id: 'sandy-blaze',
+        _id: user_id,
         channel_id: channel_id,
       }
     })
-    console.log(response)
     if (response.channel_id) {
       if (!validate(response.channel_id)) {
         return
@@ -215,13 +222,24 @@ const joinChannel = async () => {
 }
 
 const leaveChannel = () => {
+  socket.emit('leave-channel')
   channelId.value = ''
   console.log('Leave Channel')
 }
 
 let editor = undefined
 
+const getUserId = () => {
+  let user_id = localStorage.getItem('user_id')
+  if (!validate(user_id)) {
+    user_id = uuidv4()
+    localStorage.setItem('user_id', user_id)
+  }
+  return user_id
+}
+
 const runOnMount = () => {
+  user_id = getUserId()
   editor = document.getElementById('oc-editor')
   selected.value = 'Java'
   if (editor) {

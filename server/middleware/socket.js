@@ -17,7 +17,7 @@ export default defineEventHandler(event => {
     globalThis.clients = new Map()
 
     io.on('connection', (socket) => {
-        console.log(socket.id + ' : connection')
+        // console.log(socket.id + ' : connection')
 
         socket.on('connect-channel', ({ channel_id, user_id }) => {
             const id = globalThis.clients.get(socket.id)
@@ -30,6 +30,14 @@ export default defineEventHandler(event => {
             socket.join(channel_id)
             globalThis.clients.set(socket.id, channel_id)
 
+        })
+
+        socket.on('leave-channel', () => {
+            const id = globalThis.clients.get(socket.id)
+            if (id) {
+                socket.leave(id)
+                globalThis.clients.delete(socket.id)
+            }
         })
 
         socket.on('code-change', ({ user_id, channel_id, language, files }) => {
@@ -45,7 +53,7 @@ export default defineEventHandler(event => {
                 socket.leave(id)
                 globalThis.clients.delete(socket.id)
             }
-            console.log(socket.id + " : disconnected")
+            // console.log(socket.id + " : disconnected")
         })
     })
 })

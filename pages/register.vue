@@ -181,6 +181,7 @@ const registerSubmit = async () => {
       }, 3000)
       return
     }
+    loading.value = false
     await overwrite(response)
     if (redirect) {
       navigateTo(redirect)

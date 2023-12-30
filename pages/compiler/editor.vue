@@ -63,8 +63,6 @@ import io from 'socket.io-client'
 
 const { session } = await useSession()
 
-console.log(session.value)
-
 let user_id = null
 
 const socket = io({
@@ -141,7 +139,6 @@ const handleData = (e) => {
 const copyChannel = (channel_id) => {
   navigator.clipboard.writeText(channel_id)
     .then(() => {
-      console.log('copied')
       copied.value = true
       setTimeout(() => {
         copied.value = false
@@ -224,7 +221,6 @@ const joinChannel = async () => {
 const leaveChannel = () => {
   socket.emit('leave-channel')
   channelId.value = ''
-  console.log('Leave Channel')
 }
 
 let editor = undefined

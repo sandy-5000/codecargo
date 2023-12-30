@@ -1,5 +1,3 @@
-import DKUser from '~/server/models/user.model'
-
 export default defineEventHandler(async (event) => {
     try {
         const req = event.node.req
@@ -7,12 +5,12 @@ export default defineEventHandler(async (event) => {
         res.setHeader('Content-Type', 'application/json')
         if (req.method === 'POST') {
             const body = await readBody(event)
-            if (!body.username || !body.passwd) {
+            if (!body._id || !body.channel_id) {
                 res.statusCode = 400
                 return res.end(str({ error: 'Missing parameters' }))
             }
-            const user = await post(body)
-            return res.end(str(user))
+            const result = await post(body)
+            return res.end(str(result))
         } else {
             res.statusCode = 405
             return res.end(str({ error: 'Unsupported method' }))
@@ -22,13 +20,10 @@ export default defineEventHandler(async (event) => {
     }
 })
 
-async function post({ username, passwd }) {
-    const hash = await Hash(username + passwd + config.SALT)
-    const user = await DKUser.findOne({ username, passwd: hash }, { passwd: 0 })
-    if (user === null) {
-        return {
-            error: ['User not Found or', 'Username to password Incorrect']
-        }
+async function post({ _id, channel_id }) {
+    const result = {
+        _id,
+        channel_id,
     }
-    return user
+    return result
 }

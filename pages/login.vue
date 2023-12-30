@@ -1,48 +1,3 @@
-<style scoped>
-.container {
-  position: relative;
-  display: block;
-  width: 2rem;
-  height: 1rem;
-}
-
-.background {
-  position: absolute;
-  inset: 0;
-  background-color: #111827;
-  border-radius: 20px;
-  transition: all 150ms ease;
-}
-
-.circle {
-  width: 1rem;
-  height: 1rem;
-  position: absolute;
-  background-color: #334155;
-  border-radius: 100%;
-  outline: 1px solid #111827;
-  left: 0;
-  top: 0;
-  transition: all 150ms ease;
-}
-
-.checkbox {
-  display: none;
-}
-
-.checkbox:checked~.background {
-  background-color: #4f46e5;
-  border-color: #4f46e5;
-  transition: all 250ms ease;
-}
-
-.checkbox:checked~.circle {
-  transform: translateX(100%);
-  transition: all 250ms ease;
-  outline-color: #4f46e5;
-  background-color: #111827;
-}
-</style>
 <template>
   <NuxtLayout :name="layout" title="login">
     <form @submit.prevent="loginSubmit">
@@ -64,14 +19,7 @@
 
       <!-- Remember Me -->
       <div class="mt-4 flex justify-between">
-        <label for="remember_me" class="inline-flex items-center">
-          <label for="remember_me" class="container">
-            <input class="checkbox" id="remember_me" type="checkbox" />
-            <div class="background"></div>
-            <div class="circle"></div>
-          </label>
-          <span class="ms-2 text-sm text-gray-400">{{ __('Remember me') }}</span>
-        </label>
+        <ui-switch id="remember_me" prompt="Remember me"></ui-switch>
         <NuxtLink to="/auth/forgot-password"
           class="underline text-sm text-gray-400 hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-800">
           {{ __('Forgot your password?') }}

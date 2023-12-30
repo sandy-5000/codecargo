@@ -15,15 +15,10 @@
 <template>
   <nav class="w-full bg-gray-800 border-b border-gray-700">
     <div class="m-container flex">
-      <div class="flex justify-end mr-8">
-        <div class="a-center">
-          <NuxtLink to="/home">
-            <ui-logo-glow class="w-[55px]"></ui-logo-glow>
-          </NuxtLink>
-        </div>
-        <div class="hidden md:a-center">
-          <h1 class="pl-2 logo-text text-md font-semibold">Compiler</h1>
-        </div>
+      <div class="v-center mr-5 md:mr-10">
+        <NuxtLink to="/home">
+          <ui-logo-glow class="w-[55px]"></ui-logo-glow>
+        </NuxtLink>
       </div>
       <div class="space-x-4 flex">
         <ui-nav-link :to="'/compiler/home'" :active="page === 'home'">Home</ui-nav-link>

@@ -102,7 +102,7 @@ const swiftLanguage = (lang) => {
   if (data) {
     x = JSON.parse(data)
   }
-  editor.contentWindow.postMessage({
+  editor.contentWindow?.postMessage({
     eventType: 'populateCode',
     language: x.language,
     files: x.files,
@@ -118,7 +118,10 @@ socket.on('multicast', ({ sender_id, language, files }) => {
     return
   }
   selected.value = language
-  editor.contentWindow.postMessage({
+  if (!editor) {
+    editor = document.getElementById('oc-editor')
+  }
+  editor.contentWindow?.postMessage({
     eventType: 'populateCode',
     language: language,
     files: files,
@@ -235,12 +238,19 @@ const getUserId = () => {
 }
 
 const runOnMount = () => {
+  loading.value = {
+    create: false,
+    join: false,
+  }
+  codeSync.value = false
   user_id = getUserId()
   editor = document.getElementById('oc-editor')
   selected.value = 'Java'
   if (editor) {
     window.addEventListener('message', handleData)
   }
+  inputChannelId.value = ''
+  channelId.value = ''
 }
 
 onMounted(runOnMount)

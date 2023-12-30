@@ -194,4 +194,10 @@ const registerSubmit = async () => {
     loading.value = false
   }
 }
+
+const runOnMount = () => {
+  loading.value = false
+}
+
+onMounted(runOnMount)
 </script>

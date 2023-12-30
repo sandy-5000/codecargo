@@ -43,6 +43,8 @@
   </NuxtLayout>
 </template>
 <script setup>
+import { faBullseye } from '@fortawesome/free-solid-svg-icons';
+
 const layout = 'auth'
 const {
   session,
@@ -109,4 +111,10 @@ const loginSubmit = async () => {
     loading.value = false
   }
 }
+
+const runOnMount = () => {
+  loading.value = false
+}
+
+onMounted(runOnMount)
 </script>

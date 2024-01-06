@@ -227,7 +227,10 @@ const createChannel = async () => {
       localStorage.setItem('channel_id', response.channel_id)
       channelId.value = response.channel_id
       inputChannelId.value = response.channel_id
-      copyChannel(response.channel_id, 'Channel ID Created, Copied to clipboard.')
+      copyChannel(
+        response.channel_id,
+        'Channel ID Created, Copied to clipboard.'
+      )
     }
   } catch (e) {
     console.log(e)

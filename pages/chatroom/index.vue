@@ -3,7 +3,7 @@
 definePageMeta({
   middleware: [
     () => {
-      return navigateTo('/compiler/home')
+      return navigateTo('/chatroom/home')
     },
   ],
 })

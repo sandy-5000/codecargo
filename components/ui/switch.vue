@@ -30,13 +30,13 @@
   display: none;
 }
 
-.checkbox:checked~.background {
+.checkbox:checked ~ .background {
   background-color: #4f46e5;
   border-color: #4f46e5;
   transition: all 250ms ease;
 }
 
-.checkbox:checked~.circle {
+.checkbox:checked ~ .circle {
   transform: translateX(100%);
   transition: all 250ms ease;
   outline-color: #4f46e5;
@@ -46,8 +46,13 @@
 <template>
   <label :for="id" class="inline-flex items-center cursor-pointer">
     <label :for="id" class="container cursor-pointer">
-      <input :checked="checked" @input="$emit('update:checked', $event.target.checked)" class="checkbox" :id="id"
-        type="checkbox" />
+      <input
+        :checked="checked"
+        @input="$emit('update:checked', $event.target.checked)"
+        class="checkbox"
+        :id="id"
+        type="checkbox"
+      />
       <div class="background"></div>
       <div class="circle"></div>
     </label>

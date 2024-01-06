@@ -47,6 +47,10 @@ export default defineEventHandler(event => {
             socket.to(channel_id).emit('multicast', { sender_id: user_id, channel_id, language, files })
         })
 
+        socket.on('chat-message', (data) => {
+            io.emit('chat-broadcast', data)
+        })
+
         socket.on("disconnect", () => {
             const id = globalThis.clients.get(socket.id)
             if (id) {
@@ -56,4 +60,5 @@ export default defineEventHandler(event => {
             // console.log(socket.id + " : disconnected")
         })
     })
+
 })

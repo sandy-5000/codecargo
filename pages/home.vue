@@ -104,7 +104,10 @@
             </div>
           </div>
         </div>
-        <div class="p-3 w-1/2 md:w-1/3 lg:w-1/4 hover:scale-105">
+        <NuxtLink
+          to="/chatroom/home"
+          class="p-3 w-1/2 md:w-1/3 lg:w-1/4 hover:scale-105"
+        >
           <div class="bg-gray-800 shadow p-5 md:p-10 rounded-lg">
             <img
               class="block w-full"
@@ -117,7 +120,7 @@
               Chat Room
             </div>
           </div>
-        </div>
+        </NuxtLink>
       </div>
     </div>
   </NuxtLayout>

@@ -21,39 +21,60 @@
         </NuxtLink>
       </div>
       <div class="space-x-4 flex">
-        <ui-nav-link :to="'/compiler/home'" :active="page === 'home'">Home</ui-nav-link>
-        <ui-nav-link :to="'/compiler/editor'" :active="page === 'editor'">Editor</ui-nav-link>
+        <ui-nav-link :to="'/compiler/home'" :active="page === 'home'"
+          >Home</ui-nav-link
+        >
+        <ui-nav-link :to="'/compiler/editor'" :active="page === 'editor'"
+          >Editor</ui-nav-link
+        >
       </div>
       <div class="ml-auto v-center">
         <div v-if="session._id" class="flex items-center">
           <div class="relative w-36 md:w-48">
             <div class="flex justify-end">
-              <button @click="toggleOptions"
-                class="options-button a-center inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-400 bg-gray-800 hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+              <button
+                @click="toggleOptions"
+                class="options-button a-center inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-400 bg-gray-800 hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
+              >
                 <span
-                  class="options-button font-semibold text-gray-400 hover:text-white focus:outline focus:outline-2 focus:rounded-sm">{{
-                    session.name }}</span>
-                <font-awesome-icon class="ml-1 mt-[2px] text-xs" icon="fa-solid fa-angle-down" />
+                  class="options-button font-semibold text-gray-400 hover:text-white focus:outline focus:outline-2 focus:rounded-sm"
+                  >{{ session.name }}</span
+                >
+                <font-awesome-icon
+                  class="ml-1 mt-[2px] text-xs"
+                  icon="fa-solid fa-angle-down"
+                />
               </button>
             </div>
-            <div :class="{
-              'absolute top-full left-0 w-full rounded-md bg-gray-700 py-1 min-w-16 nav-options-close': true,
-              'nav-options-open': options
-            }">
-              <NuxtLink to="/user/profile"
-                class="block py-2 px-4 text-sm cursor-pointer hover:bg-gray-800 text-slate-300">Profile</NuxtLink>
-              <span class="block py-2 px-4 text-sm cursor-pointer hover:bg-gray-800 text-slate-300" @click="logout">Log
-                Out</span>
+            <div
+              :class="{
+                'absolute top-full left-0 w-full rounded-md bg-gray-700 py-1 min-w-16 nav-options-close': true,
+                'nav-options-open': options,
+              }"
+            >
+              <NuxtLink
+                to="/user/profile"
+                class="block py-2 px-4 text-sm cursor-pointer hover:bg-gray-800 text-slate-300"
+                >Profile</NuxtLink
+              >
+              <span
+                class="block py-2 px-4 text-sm cursor-pointer hover:bg-gray-800 text-slate-300"
+                @click="logout"
+                >Log Out</span
+              >
             </div>
           </div>
         </div>
         <div v-if="!session._id" class="flex items-center">
           <button
-            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-400 bg-gray-800 hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-            <NuxtLink :to="`/login?redirect=${route.path}`"
-              class="font-semibold text-gray-400 hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-              Log
-              in</NuxtLink>
+            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-400 bg-gray-800 hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
+          >
+            <NuxtLink
+              :to="`/login?redirect=${route.path}`"
+              class="font-semibold text-gray-400 hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+            >
+              Log in</NuxtLink
+            >
           </button>
         </div>
       </div>

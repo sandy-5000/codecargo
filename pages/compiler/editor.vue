@@ -106,14 +106,13 @@ import io from 'socket.io-client'
 
 const { session } = await useSession()
 
-let user_id = null
-
 const socket = io({
   path: '/api/socket.io/',
 })
 
 const layout = 'compiler'
 
+const user_id = useState('user_id', () => '')
 const modal = useState('modal', () => false)
 const selected = useState('selected', () => 'Java')
 const codeSync = useState('codeSync', () => false)
@@ -157,7 +156,7 @@ const swiftLanguage = (lang) => {
   if (channel_id && codeSync.value) {
     socket.emit('code-change', {
       channel_id,
-      user_id,
+      user_id: user_id.value,
       language: x.language,
       files: x.files,
     })
@@ -165,7 +164,7 @@ const swiftLanguage = (lang) => {
 }
 
 socket.on('multicast', ({ sender_id, language, files }) => {
-  if (sender_id == user_id || !codeSync.value) {
+  if (sender_id == user_id.value || !codeSync.value) {
     return
   }
   selected.value = language
@@ -188,7 +187,12 @@ const handleData = (e) => {
     const { language, files } = e.data
     localStorage.setItem(e.data.language, JSON.stringify({ language, files }))
     if (channel_id && codeSync.value) {
-      socket.emit('code-change', { channel_id, user_id, language, files })
+      socket.emit('code-change', {
+        channel_id,
+        user_id: user_id.value,
+        language,
+        files,
+      })
     }
   }
 }
@@ -213,7 +217,7 @@ const createChannel = async () => {
     const response = await $fetch('/api/channel/create', {
       method: 'POST',
       body: {
-        _id: 'sandy-blaze',
+        _id: user_id.value,
       },
     })
     if (response.channel_id) {
@@ -222,7 +226,7 @@ const createChannel = async () => {
       }
       socket.emit('connect-channel', {
         channel_id: response.channel_id,
-        user_id,
+        user_id: user_id.value,
       })
       localStorage.setItem('channel_id', response.channel_id)
       channelId.value = response.channel_id
@@ -253,7 +257,7 @@ const joinChannel = async () => {
     const response = await $fetch('/api/channel/join', {
       method: 'POST',
       body: {
-        _id: user_id,
+        _id: user_id.value,
         channel_id: channel_id,
       },
     })
@@ -263,7 +267,7 @@ const joinChannel = async () => {
       }
       socket.emit('connect-channel', {
         channel_id: response.channel_id,
-        user_id,
+        user_id: user_id.value,
       })
       localStorage.setItem('channel_id', response.channel_id)
       channelId.value = response.channel_id
@@ -277,7 +281,9 @@ const joinChannel = async () => {
 }
 
 const leaveChannel = () => {
-  socket.emit('leave-channel')
+  socket.emit('leave-channel', {
+    user_id: user_id.value,
+  })
   channelId.value = ''
 }
 
@@ -299,7 +305,7 @@ const runOnMount = () => {
   }
   message.value = ''
   codeSync.value = false
-  user_id = getUserId()
+  user_id.value = getUserId()
   editor = document.getElementById('oc-editor')
   selected.value = 'Java'
   if (editor) {

@@ -52,11 +52,12 @@
   </NuxtLayout>
 </template>
 <script setup>
+import { validate, v4 as uuidv4 } from 'uuid'
 import io from 'socket.io-client'
 
 const layout = 'chatroom'
 
-const id = `${Date.now()}-${Math.floor(Math.random() * 10000)}`
+let id = useState('id', () => '')
 
 const socket = io({
   path: '/api/socket.io/',
@@ -80,7 +81,7 @@ const addMessage = ({ uid, content }) => {
     messages.value.shift()
   }
   messages.value.push({ id: uid, content })
-  if (id === uid) {
+  if (id.value === uid) {
     scrollToBottom()
   }
 }
@@ -91,9 +92,25 @@ socket.on('chat-broadcast', (data) => {
 
 const handleChatSubmit = () => {
   socket.emit('chat-message', {
-    uid: id,
+    uid: id.value,
     content: messageBox.value,
   })
   messageBox.value = ''
 }
+
+const getUserId = () => {
+  let user_id = localStorage.getItem('user_id')
+  if (!validate(user_id)) {
+    user_id = uuidv4()
+    localStorage.setItem('user_id', user_id)
+  }
+  return user_id
+}
+
+const runOnMount = () => {
+  id.value = getUserId()
+  socket.emit('chat-connect', { user_id: id.value })
+}
+
+onMounted(runOnMount)
 </script>

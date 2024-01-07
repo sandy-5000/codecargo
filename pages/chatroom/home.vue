@@ -8,9 +8,9 @@
           <div class="flex px-5">
             <div class="mr-auto">
               <h1
-                class="text-md font-normal text-gray-100 text-center cursor-pointer"
+                class="text-sm font-normal text-gray-100 text-center cursor-pointer"
               >
-                Darkube Chat
+                Darkube, Global Chat
               </h1>
             </div>
           </div>
@@ -21,8 +21,8 @@
         style="height: calc(100% - 125px)"
         class="px-3 py-1 rounded-xl overflow-y-scroll"
       >
-        <chatroom-message mtype="receive"
-          >Hello guys, this is Darkube chat!</chatroom-message
+        <chatroom-message mtype="Darkube"
+          >Hello guys, this is Darkube!</chatroom-message
         >
         <chatroom-message
           :mtype="msg.id === id ? 'sender' : 'receive'"

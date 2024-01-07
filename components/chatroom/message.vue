@@ -27,5 +27,10 @@
 const props = defineProps({
   mtype: String,
 })
-const user = props.mtype === 'sender' ? 'You' : 'Anonymous'
+const userType = {
+  Darkube: 'Darkube',
+  receive: 'Anonymous',
+  sender: 'You',
+}
+const user = userType[props.mtype]
 </script>

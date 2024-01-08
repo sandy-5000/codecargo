@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: [
     '~/assets/css/main.css',
-    '@fortawesome/fontawesome-svg-core/styles.css'
+    '@fortawesome/fontawesome-svg-core/styles.css',
   ],
   postcss: {
     plugins: {
@@ -11,15 +11,20 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  plugins: [
-    '~/plugins/fontawesome'
-  ],
+  plugins: ['~/plugins/fontawesome'],
   modules: [
     'nuxt-icons',
-    '@sidebase/nuxt-session',
+    [
+      '@sidebase/nuxt-session',
+      {
+        session: {
+          expiryInSeconds: 6 * 60 * 60,
+        },
+      },
+    ],
   ],
   runtimeConfig: {
     MONGODB: process.env.MONGODB,
     SALT: process.env.SALT,
-  }
+  },
 })

@@ -5,7 +5,7 @@
   </Head>
 
   <body class="font-sans text-gray-900 antialiased">
-    <div class="h-screen a-center bg-gray-900 dark:bg-gray-900">
+    <div style="height: 100dvh;" class="a-center bg-gray-900 dark:bg-gray-900">
       <div
         style="width: min(100%, 500px)"
         class="min-h-screen flex flex-col justify-center pt-6 px-3 sm:pt-0"

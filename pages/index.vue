@@ -1,9 +1,10 @@
-<template>
-</template>
+<template></template>
 <script>
 definePageMeta({
-    middleware: [() => {
-        return navigateTo('/home')
-    }],
+  middleware: [
+    () => {
+      return navigateTo('/home')
+    },
+  ],
 })
 </script>

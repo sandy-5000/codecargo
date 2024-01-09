@@ -5,23 +5,46 @@
         <!-- UserName -->
         <div>
           <ui-input-label for="username" :value="__('Username')" />
-          <ui-text-input :value="body.username" @update:value="(x) => changeValue('username', x)" id="username"
-            className="block mt-1 w-full" type="text" name="username" required autofocus />
+          <ui-text-input
+            :value="body.username"
+            @update:value="(x) => changeValue('username', x)"
+            id="username"
+            className="block mt-1 w-full"
+            type="text"
+            name="username"
+            required
+            autofocus
+          />
           <ui-input-error :messages="errors.username" className="mt-2" />
         </div>
         <!-- Name -->
         <div>
           <ui-input-label for="name" :value="__('Name')" />
-          <ui-text-input :value="body.name" @update:value="(x) => changeValue('name', x)" id="name"
-            className="block mt-1 w-full" type="text" name="name" required autofocus />
+          <ui-text-input
+            :value="body.name"
+            @update:value="(x) => changeValue('name', x)"
+            id="name"
+            className="block mt-1 w-full"
+            type="text"
+            name="name"
+            required
+            autofocus
+          />
           <ui-input-error :messages="null" className="mt-2" />
         </div>
       </div>
       <!-- Email Address -->
       <div class="mt-2">
         <ui-input-label for="email" :value="__('Email')" />
-        <ui-text-input :value="body.email" @update:value="(x) => changeValue('email', x)" id="email"
-          className="block mt-1 w-full" type="email" name="email" required />
+        <ui-text-input
+          :value="body.email"
+          @update:value="(x) => changeValue('email', x)"
+          id="email"
+          className="block mt-1 w-full"
+          type="email"
+          name="email"
+          required
+        />
         <ui-input-error :messages="null" className="mt-2" />
       </div>
 
@@ -29,22 +52,41 @@
         <!-- Password -->
         <div>
           <ui-input-label for="password" :value="__('Password')" />
-          <ui-text-input :value="body.passwd" @update:value="(x) => changeValue('passwd', x)" id="password"
-            className="block mt-1 w-full" type="password" name="password" required />
+          <ui-text-input
+            :value="body.passwd"
+            @update:value="(x) => changeValue('passwd', x)"
+            id="password"
+            className="block mt-1 w-full"
+            type="password"
+            name="password"
+            required
+          />
           <ui-input-error :messages="errors.passwd" className="mt-2" />
         </div>
         <!-- Confirm Password -->
         <div>
-          <ui-input-label for="password_confirmation" :value="__('Confirm Password')" />
-          <ui-text-input :value="body.cpasswd" @update:value="(x) => changeValue('cpasswd', x)" id="password_confirmation"
-            className="block mt-1 w-full" type="password" name="password_confirmation" required />
+          <ui-input-label
+            for="password_confirmation"
+            :value="__('Confirm Password')"
+          />
+          <ui-text-input
+            :value="body.cpasswd"
+            @update:value="(x) => changeValue('cpasswd', x)"
+            id="password_confirmation"
+            className="block mt-1 w-full"
+            type="password"
+            name="password_confirmation"
+            required
+          />
           <ui-input-error :messages="errors.cpasswd" className="mt-2" />
         </div>
       </div>
 
       <div class="flex items-center justify-between mt-4">
-        <NuxtLink to="/login"
-          class="underline text-sm text-gray-400 hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-800">
+        <NuxtLink
+          to="/login"
+          class="underline text-sm text-gray-400 hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-800"
+        >
           {{ __('Already registered?') }}
         </NuxtLink>
         <ui-button-primary v-if="!loading" type="submit" class="ms-4">
@@ -59,11 +101,7 @@
 </template>
 <script setup>
 const layout = 'auth'
-const {
-  session,
-  remove,
-  overwrite
-} = await useSession()
+const { session, remove, overwrite } = await useSession()
 const route = useRoute()
 const { redirect } = route.query
 if (session.value?._id) {
@@ -88,13 +126,13 @@ const checkUsername = debounce(async () => {
     const response = await $fetch('/api/username', {
       method: 'POST',
       body: {
-        username: body.value.username
-      }
+        username: body.value.username,
+      },
     })
     if (response.status === 'ALREADY_TAKEN') {
       errors.value.username = 'Username Already Taken'
     }
-  } catch { }
+  } catch {}
 }, 2000)
 
 const body = useState('body', () => {
@@ -145,7 +183,7 @@ const validate = () => {
     flag = false
   }
   if (body.value.cpasswd && body.value.passwd !== body.value.cpasswd) {
-    errors.value.cpasswd = 'Password didn\'t Match'
+    errors.value.cpasswd = "Password didn't Match"
     flag = false
   }
   return flag
@@ -161,7 +199,7 @@ const registerSubmit = async () => {
     name: '',
     email: '',
     passwd: '',
-    cpasswd: ''
+    cpasswd: '',
   }
   if (session.value?._id) {
     await remove()
@@ -171,8 +209,11 @@ const registerSubmit = async () => {
     const response = await $fetch('/api/user/register', {
       method: 'POST',
       body: {
-        username, name, passwd, email
-      }
+        username,
+        name,
+        passwd,
+        email,
+      },
     })
     if (response.error) {
       errors.value.username = response.error

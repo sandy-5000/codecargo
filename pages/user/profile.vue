@@ -10,42 +10,81 @@
                   {{ __('Profile Information') }}
                 </h2>
                 <p class="mt-1 text-sm text-gray-400">
-                  {{ __("Update your account's profile information and email address.") }}
+                  {{
+                    __(
+                      "Update your account's profile information and email address."
+                    )
+                  }}
                 </p>
               </header>
-              <form @submit.prevent="handleProfileUpdate" class="mt-6 space-y-6">
+              <form
+                @submit.prevent="handleProfileUpdate"
+                class="mt-6 space-y-6"
+              >
                 <div>
                   <ui-input-label for="name" :value="__('Name')" />
-                  <ui-text-input id="name" :value="info.profile.name" @update:value="(x) => info.profile.name = x"
-                    name="name" type="text" class="mt-1 block w-full" required autofocus />
+                  <ui-text-input
+                    id="name"
+                    :value="info.profile.name"
+                    @update:value="(x) => (info.profile.name = x)"
+                    name="name"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                  />
                   <ui-input-error class="mt-2" :messages="null" />
                 </div>
 
                 <div>
                   <ui-input-label for="email" :value="__('Email')" />
-                  <ui-text-input id="email" :value="info.profile.email" @update:value="(x) => info.profile.email = x"
-                    name="email" type="email" class="mt-1 block w-full" required />
+                  <ui-text-input
+                    id="email"
+                    :value="info.profile.email"
+                    @update:value="(x) => (info.profile.email = x)"
+                    name="email"
+                    type="email"
+                    class="mt-1 block w-full"
+                    required
+                  />
                   <ui-input-error class="mt-2" :messages="null" />
 
                   <div v-if="true">
                     <p class="text-sm mt-2 text-gray-200">
                       {{ __('Your email address is unverified.') }}
 
-                      <button form="send-verification"
-                        class="underline text-sm text-gray-400 hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-800">
-                        {{ __('Click here to re-send the verification email.') }}
+                      <button
+                        form="send-verification"
+                        class="underline text-sm text-gray-400 hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-800"
+                      >
+                        {{
+                          __('Click here to re-send the verification email.')
+                        }}
                       </button>
                     </p>
-                    <p v-if="true" class="mt-2 font-medium text-sm text-green-400">
-                      {{ __('A new verification link has been sent to your email address.') }}
+                    <p
+                      v-if="true"
+                      class="mt-2 font-medium text-sm text-green-400"
+                    >
+                      {{
+                        __(
+                          'A new verification link has been sent to your email address.'
+                        )
+                      }}
                     </p>
                   </div>
                 </div>
 
                 <div class="flex items-center gap-4">
-                  <ui-button-primary type="submit" v-if="!loading.profileUpdate">Save</ui-button-primary>
-                  <ui-button-loading v-if="loading.profileUpdate">Updating...</ui-button-loading>
-                  <p v-if="show.profileUpdated" class="text-sm text-gray-400">{{ show.profileUpdated }}</p>
+                  <ui-button-primary type="submit" v-if="!loading.profileUpdate"
+                    >Save</ui-button-primary
+                  >
+                  <ui-button-loading v-if="loading.profileUpdate"
+                    >Updating...</ui-button-loading
+                  >
+                  <p v-if="show.profileUpdated" class="text-sm text-gray-400">
+                    {{ show.profileUpdated }}
+                  </p>
                 </div>
               </form>
             </section>
@@ -61,38 +100,75 @@
                 </h2>
 
                 <p class="mt-1 text-sm text-gray-400">
-                  {{ __('Ensure your account is using a long, random password to stay secure.') }}
+                  {{
+                    __(
+                      'Ensure your account is using a long, random password to stay secure.'
+                    )
+                  }}
                 </p>
               </header>
 
-              <form @submit.prevent="handlePasswordUpdate" class="mt-6 space-y-6">
+              <form
+                @submit.prevent="handlePasswordUpdate"
+                class="mt-6 space-y-6"
+              >
                 <div>
-                  <ui-input-label for="current_password" :value="__('Current Password')" />
-                  <ui-text-input id="current_password" :value="info.passwd.current"
-                    @update:value="(x) => info.passwd.current = x" name="current_password" type="password"
-                    class="mt-1 block w-full" />
+                  <ui-input-label
+                    for="current_password"
+                    :value="__('Current Password')"
+                  />
+                  <ui-text-input
+                    id="current_password"
+                    :value="info.passwd.current"
+                    @update:value="(x) => (info.passwd.current = x)"
+                    name="current_password"
+                    type="password"
+                    class="mt-1 block w-full"
+                  />
                   <ui-input-error :messages="null" class="mt-2" />
                 </div>
 
                 <div>
                   <ui-input-label for="password" :value="__('New Password')" />
-                  <ui-text-input id="password" :value="info.passwd.updated" @update:value="(x) => info.passwd.updated = x"
-                    name="password" type="password" class="mt-1 block w-full" />
+                  <ui-text-input
+                    id="password"
+                    :value="info.passwd.updated"
+                    @update:value="(x) => (info.passwd.updated = x)"
+                    name="password"
+                    type="password"
+                    class="mt-1 block w-full"
+                  />
                   <ui-input-error :messages="null" class="mt-2" />
                 </div>
 
                 <div>
-                  <ui-input-label for="password_confirmation" :value="__('Confirm Password')" />
-                  <ui-text-input id="password_confirmation" :value="info.passwd.confirm"
-                    @update:value="(x) => info.passwd.confirm = x" name="password_confirmation" type="password"
-                    class="mt-1 block w-full" />
+                  <ui-input-label
+                    for="password_confirmation"
+                    :value="__('Confirm Password')"
+                  />
+                  <ui-text-input
+                    id="password_confirmation"
+                    :value="info.passwd.confirm"
+                    @update:value="(x) => (info.passwd.confirm = x)"
+                    name="password_confirmation"
+                    type="password"
+                    class="mt-1 block w-full"
+                  />
                   <ui-input-error :messages="null" class="mt-2" />
                 </div>
 
                 <div class="flex items-center gap-4">
-                  <ui-button-primary type="submit" v-if="!loading.passwordUpdate">Save</ui-button-primary>
-                  <ui-button-loading v-if="loading.passwordUpdate">Updating...</ui-button-loading>
-                  <p v-if="show.passwordUpdated" class="text-sm text-gray-400">{{ show.passwordUpdated }}</p>
+                  <ui-button-primary
+                    type="submit"
+                    v-if="!loading.passwordUpdate"
+                    >Save</ui-button-primary
+                  >
+                  <ui-button-loading v-if="loading.passwordUpdate"
+                    >Updating...</ui-button-loading
+                  >
+                  <p v-if="show.passwordUpdated" class="text-sm text-gray-400">
+                    {{ show.passwordUpdated }}
+                  </p>
                 </div>
               </form>
             </section>
@@ -107,8 +183,10 @@
                   {{ __('Delete Account') }}
                 </h2>
                 <p class="mt-1 text-sm text-gray-400">
-                  Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting
-                  your account, please download any data or information that you wish to retain.
+                  Once your account is deleted, all of its resources and data
+                  will be permanently deleted. Before deleting your account,
+                  please download any data or information that you wish to
+                  retain.
                 </p>
               </header>
               <ui-button-danger>{{ __('Delete Account') }}</ui-button-danger>
@@ -190,8 +268,9 @@ const handleProfileUpdate = async () => {
       body: {
         update: 'profile',
         _id: session.value._id,
-        name, email
-      }
+        name,
+        email,
+      },
     })
     if (!response.error) {
       await update({
@@ -223,7 +302,7 @@ const handlePasswordUpdate = async () => {
     return
   }
   if (updated !== confirm) {
-    passwordUpdated('Password did\'t match')
+    passwordUpdated("Password did't match")
     return
   }
   loading.value.passwordUpdate = true
@@ -234,8 +313,8 @@ const handlePasswordUpdate = async () => {
         update: 'passwd',
         _id: session.value._id,
         passwd: current,
-        npasswd: updated
-      }
+        npasswd: updated,
+      },
     })
     passwordUpdated(response.error || response.status)
   } catch (e) {

@@ -4,31 +4,51 @@
       <!-- Email Address -->
       <div>
         <ui-input-label for="email" :value="__('Username')" />
-        <ui-text-input :value="body.username" @update:value="(x) => changeValue('username', x)" id="username"
-          className="block mt-1 w-full" type="text" name="email" :required="true" autofocus="true" />
+        <ui-text-input
+          :value="body.username"
+          @update:value="(x) => changeValue('username', x)"
+          id="username"
+          className="block mt-1 w-full"
+          type="text"
+          name="email"
+          :required="true"
+          autofocus="true"
+        />
         <ui-input-error :messages="errors.username" className="mt-2" />
       </div>
 
       <!-- Password -->
       <div class="mt-4">
         <ui-input-label for="password" :value="__('Password')" />
-        <ui-text-input :value="body.passwd" @update:value="(x) => changeValue('passwd', x)" id="password"
-          className="block mt-1 w-full" type="password" name="password" :required="true" />
+        <ui-text-input
+          :value="body.passwd"
+          @update:value="(x) => changeValue('passwd', x)"
+          id="password"
+          className="block mt-1 w-full"
+          type="password"
+          name="password"
+          :required="true"
+        />
         <ui-input-error :messages="errors.passwd" className="mt-2" />
       </div>
 
       <!-- Remember Me -->
       <div class="mt-4 flex justify-between">
         <ui-switch id="remember_me" prompt="Remember me"></ui-switch>
-        <NuxtLink to="/auth/forgot-password"
-          class="underline text-sm text-gray-400 hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-800">
+        <NuxtLink
+          to="/auth/forgot-password"
+          class="underline text-sm text-gray-400 hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-800"
+        >
           {{ __('Forgot your password?') }}
         </NuxtLink>
       </div>
 
       <div class="flex items-center justify-end mt-4">
-        <NuxtLink to="/register" style="margin-right: auto;"
-          class="underline text-sm text-gray-400 hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-800">
+        <NuxtLink
+          to="/register"
+          style="margin-right: auto"
+          class="underline text-sm text-gray-400 hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-800"
+        >
           {{ __('Not registered?') }}
         </NuxtLink>
 
@@ -43,14 +63,10 @@
   </NuxtLayout>
 </template>
 <script setup>
-import { faBullseye } from '@fortawesome/free-solid-svg-icons';
+import { faBullseye } from '@fortawesome/free-solid-svg-icons'
 
 const layout = 'auth'
-const {
-  session,
-  remove,
-  overwrite
-} = await useSession()
+const { session, remove, overwrite } = await useSession()
 const route = useRoute()
 const { redirect } = route.query
 if (session.value?._id) {
@@ -88,8 +104,9 @@ const loginSubmit = async () => {
     const response = await $fetch('/api/user/login', {
       method: 'POST',
       body: {
-        username, passwd
-      }
+        username,
+        passwd,
+      },
     })
     if (response.error) {
       errors.value.username = response.error

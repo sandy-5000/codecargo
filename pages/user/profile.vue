@@ -28,6 +28,7 @@
                     :value="info.profile.name"
                     @update:value="(x) => (info.profile.name = x)"
                     name="name"
+                    placeholder="Enter Your Name"
                     type="text"
                     class="mt-1 block w-full"
                     required
@@ -43,6 +44,7 @@
                     :value="info.profile.email"
                     @update:value="(x) => (info.profile.email = x)"
                     name="email"
+                    placeholder="Enter Your Email Address"
                     type="email"
                     class="mt-1 block w-full"
                     required
@@ -122,6 +124,7 @@
                     :value="info.passwd.current"
                     @update:value="(x) => (info.passwd.current = x)"
                     name="current_password"
+                    placeholder="Enter Your Current Password"
                     type="password"
                     class="mt-1 block w-full"
                   />
@@ -135,6 +138,7 @@
                     :value="info.passwd.updated"
                     @update:value="(x) => (info.passwd.updated = x)"
                     name="password"
+                    placeholder="Enter Strong Password"
                     type="password"
                     class="mt-1 block w-full"
                   />
@@ -151,6 +155,7 @@
                     :value="info.passwd.confirm"
                     @update:value="(x) => (info.passwd.confirm = x)"
                     name="password_confirmation"
+                    placeholder="Confirm Password"
                     type="password"
                     class="mt-1 block w-full"
                   />

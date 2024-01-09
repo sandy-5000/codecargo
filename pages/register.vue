@@ -1,37 +1,37 @@
 <template>
   <NuxtLayout :name="layout" title="register">
     <form @submit.prevent="registerSubmit">
-      <div class="flex space-x-2">
-        <!-- UserName -->
-        <div>
-          <ui-input-label for="username" :value="__('Username')" />
-          <ui-text-input
-            :value="body.username"
-            @update:value="(x) => changeValue('username', x)"
-            id="username"
-            className="block mt-1 w-full"
-            type="text"
-            name="username"
-            required
-            autofocus
-          />
-          <ui-input-error :messages="errors.username" className="mt-2" />
-        </div>
-        <!-- Name -->
-        <div>
-          <ui-input-label for="name" :value="__('Name')" />
-          <ui-text-input
-            :value="body.name"
-            @update:value="(x) => changeValue('name', x)"
-            id="name"
-            className="block mt-1 w-full"
-            type="text"
-            name="name"
-            required
-            autofocus
-          />
-          <ui-input-error :messages="null" className="mt-2" />
-        </div>
+      <!-- UserName -->
+      <div>
+        <ui-input-label for="username" :value="__('Username')" />
+        <ui-text-input
+          :value="body.username"
+          @update:value="(x) => changeValue('username', x)"
+          id="username"
+          className="block mt-1 w-full"
+          type="text"
+          name="username"
+          placeholder="Enter Username"
+          required
+          autofocus
+        />
+        <ui-input-error :messages="errors.username" className="mt-2" />
+      </div>
+      <!-- Name -->
+      <div class="mt-2">
+        <ui-input-label for="name" :value="__('Name')" />
+        <ui-text-input
+          :value="body.name"
+          @update:value="(x) => changeValue('name', x)"
+          id="name"
+          className="block mt-1 w-full"
+          type="text"
+          placeholder="Enter Your Name"
+          name="name"
+          required
+          autofocus
+        />
+        <ui-input-error :messages="null" className="mt-2" />
       </div>
       <!-- Email Address -->
       <div class="mt-2">
@@ -42,6 +42,7 @@
           id="email"
           className="block mt-1 w-full"
           type="email"
+          placeholder="Enter Your Email Address"
           name="email"
           required
         />
@@ -58,6 +59,7 @@
             id="password"
             className="block mt-1 w-full"
             type="password"
+            placeholder="Enter Strong Password"
             name="password"
             required
           />
@@ -75,6 +77,7 @@
             id="password_confirmation"
             className="block mt-1 w-full"
             type="password"
+            placeholder="Confirm Password"
             name="password_confirmation"
             required
           />

@@ -63,8 +63,6 @@
   </NuxtLayout>
 </template>
 <script setup>
-import { faBullseye } from '@fortawesome/free-solid-svg-icons'
-
 const layout = 'auth'
 const { session, remove, overwrite } = await useSession()
 const route = useRoute()

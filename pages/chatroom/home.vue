@@ -34,6 +34,7 @@
         <div class="h-[65px] py-2 px-3 relative">
           <input
             v-model="messageBox"
+            placeholder="Message"
             class="outline-none border-2 border-gray-700 focus:border-indigo-600 px-3 pr-[100px] rounded-lg w-full h-full text-gray-100 bg-slate-800"
           />
           <div

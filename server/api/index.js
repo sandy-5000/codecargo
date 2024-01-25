@@ -1,3 +1,3 @@
 export default defineEventHandler(async () => {
-    return { message: 'Nuxt Server' }
+    return { message: 'Api [Darkube]' }
 })

@@ -76,12 +76,15 @@
             </div>
           </div>
         </NuxtLink>
-        <div class="p-3 w-1/2 md:w-1/3 lg:w-1/4 hover:scale-105">
+        <NuxtLink
+          to="/blog"
+          class="p-3 w-1/2 md:w-1/3 lg:w-1/4 hover:scale-105"
+        >
           <div class="bg-gray-800 shadow p-5 md:p-10 rounded-lg">
             <img
               class="block w-full"
               src="~/assets/images/blog.png"
-              alt="compiler"
+              alt="blog"
             />
             <div
               class="mt-3 text-sm font-semibold text-center text-gray-100 dark:text-gray-100"
@@ -89,13 +92,16 @@
               Blog
             </div>
           </div>
-        </div>
-        <div class="p-3 w-1/2 md:w-1/3 lg:w-1/4 hover:scale-105">
+        </NuxtLink>
+        <NuxtLink
+          to="/askme"
+          class="p-3 w-1/2 md:w-1/3 lg:w-1/4 hover:scale-105"
+        >
           <div class="bg-gray-800 shadow p-5 md:p-10 rounded-lg">
             <img
               class="block w-full"
               src="~/assets/images/ask.png"
-              alt="compiler"
+              alt="askme"
             />
             <div
               class="mt-3 text-sm font-semibold text-center text-gray-100 dark:text-gray-100"
@@ -103,7 +109,7 @@
               Ask Me
             </div>
           </div>
-        </div>
+        </NuxtLink>
         <NuxtLink
           to="/chatroom/home"
           class="p-3 w-1/2 md:w-1/3 lg:w-1/4 hover:scale-105"
@@ -112,7 +118,7 @@
             <img
               class="block w-full"
               src="~/assets/images/chat.png"
-              alt="compiler"
+              alt="chat"
             />
             <div
               class="mt-3 text-sm font-semibold text-center text-gray-100 dark:text-gray-100"

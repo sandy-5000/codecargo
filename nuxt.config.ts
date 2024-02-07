@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   css: [
     '~/assets/css/main.css',
     '@fortawesome/fontawesome-svg-core/styles.css',
+    '@vueup/vue-quill/dist/vue-quill.snow.css'
   ],
   postcss: {
     plugins: {

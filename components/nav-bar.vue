@@ -18,6 +18,7 @@
     </div>
   </nav>
 </template>
+
 <script setup>
 const props = defineProps({
   page: String,

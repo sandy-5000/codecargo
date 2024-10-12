@@ -6,7 +6,6 @@
       content="Welcome to DARKUBE - Your Ultimate Coding Hub!"
     />
   </Head>
-
   <body class="font-sans antialiased bg-gray-900">
     <div class="min-h-screen">
       <nav-bar :page="page"></nav-bar>
@@ -19,6 +18,7 @@
     </div>
   </body>
 </template>
+
 <script setup>
 const props = defineProps({
   page: String,

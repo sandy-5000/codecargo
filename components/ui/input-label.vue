@@ -3,6 +3,7 @@
     {{ value }}
   </label>
 </template>
+
 <script setup>
 const props = defineProps({
   value: String,

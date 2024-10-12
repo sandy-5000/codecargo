@@ -202,6 +202,7 @@
     </div>
   </NuxtLayout>
 </template>
+
 <script setup>
 const layout = 'app'
 const { session, update } = await useSession()

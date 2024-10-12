@@ -1,12 +1,6 @@
 {
+  "trailingComma": "es5",
   "semi": false,
   "singleQuote": true,
-  "overrides": [
-    {
-      "files": "*.js",
-      "options": {
-        "parser": "none"
-      }
-    }
-  ]
+  "tabWidth": 2
 }

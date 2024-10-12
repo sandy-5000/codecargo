@@ -131,6 +131,7 @@
     </div>
   </NuxtLayout>
 </template>
+
 <script setup>
 const layout = 'app'
 const { session } = await useSession()

@@ -22,7 +22,6 @@
         />
         <ui-input-error :messages="null" class="mt-2" />
       </div>
-
       <div class="flex items-center justify-end mt-4">
         <ui-button-primary>
           {{ __('Email Password Reset Link') }}
@@ -31,6 +30,7 @@
     </form>
   </NuxtLayout>
 </template>
+
 <script setup>
 const layout = 'auth'
 </script>

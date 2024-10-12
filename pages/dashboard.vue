@@ -11,7 +11,7 @@
           <div
             class="p-6 text-sm font-semibold text-gray-100 dark:text-gray-100"
           >
-            {{ __("You're just logged in! That all nothing special.") }}
+            {{ __('You logged in! great.') }}
           </div>
         </div>
       </div>
@@ -29,13 +29,14 @@
           <div
             class="p-6 text-sm font-semibold text-gray-100 dark:text-gray-100"
           >
-            {{ __("Remaining things will be added soon.") }}
+            {{ __('Remaining things will be added soon.') }}
           </div>
         </div>
       </div>
     </div>
   </NuxtLayout>
 </template>
+
 <script setup>
 const layout = 'app'
 const { session } = await useSession()

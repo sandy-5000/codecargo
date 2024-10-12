@@ -62,6 +62,7 @@
     </form>
   </NuxtLayout>
 </template>
+
 <script setup>
 const layout = 'auth'
 const { session, remove, overwrite } = await useSession()

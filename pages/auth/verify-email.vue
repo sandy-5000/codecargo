@@ -35,6 +35,7 @@
     </div>
   </NuxtLayout>
 </template>
+
 <script setup>
 const layout = 'auth'
 </script>

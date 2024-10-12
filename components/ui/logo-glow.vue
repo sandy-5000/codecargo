@@ -14,6 +14,7 @@
     ></ui-logo>
   </div>
 </template>
+
 <script setup>
 const props = defineProps({
   className: String,

@@ -8,6 +8,7 @@
   transform: scale(1.05);
 }
 </style>
+
 <template>
   <NuxtLayout :name="layout" page="home" header="Home" title="Home">
     <div class="w-full">
@@ -176,6 +177,7 @@
     </div>
   </NuxtLayout>
 </template>
+
 <script setup>
 const layout = 'compiler'
 </script>

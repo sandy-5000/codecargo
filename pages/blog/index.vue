@@ -1,17 +1,12 @@
 <template>
-  <NuxtLayout
-    :name="layout"
-    page="blog"
-    header="Blog"
-    title="Blog"
-  >
+  <NuxtLayout :name="layout" page="blog" header="Blog" title="Blog">
     <div class="py-12 mx-2 md:mx-0">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-gray-800 overflow-hidden shadow-sm rounded-lg">
           <div
             class="p-6 text-sm font-semibold text-gray-100 dark:text-gray-100"
           >
-            {{ __("Blog will be added soon.") }}
+            {{ __('Blog will be added soon.') }}
           </div>
         </div>
       </div>
@@ -27,6 +22,7 @@
     </div>
   </NuxtLayout>
 </template>
+
 <script setup>
 const layout = 'later'
 </script>

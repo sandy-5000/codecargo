@@ -12,6 +12,7 @@
   transform: scale(1) translateY(0);
 }
 </style>
+
 <template>
   <div v-if="session._id" class="flex items-center">
     <div class="relative w-32 md:w-48">
@@ -65,6 +66,7 @@
     </button>
   </div>
 </template>
+
 <script setup>
 const route = useRoute()
 const { session, remove } = await useSession()

@@ -10,6 +10,7 @@
   transform: translateX(0);
 }
 </style>
+
 <template>
   <div
     :class="{
@@ -40,6 +41,7 @@
     </div>
   </div>
 </template>
+
 <script setup>
 const props = defineProps({
   message: String,

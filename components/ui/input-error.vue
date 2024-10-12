@@ -10,6 +10,7 @@
     </ul>
   </span>
 </template>
+
 <script setup>
 const props = defineProps({
   messages: [String] | String,

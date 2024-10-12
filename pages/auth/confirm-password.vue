@@ -6,7 +6,6 @@
         before continuing.
       </p>
     </div>
-
     <form method="POST" action="#">
       <!-- Password -->
       <div>
@@ -20,7 +19,6 @@
         />
         <ui-input-error :messages="null" class="mt-2" />
       </div>
-
       <div class="flex justify-end mt-4">
         <ui-button-primary>
           {{ __('Confirm') }}
@@ -29,6 +27,7 @@
     </form>
   </NuxtLayout>
 </template>
+
 <script setup>
 const layout = 'auth'
 </script>

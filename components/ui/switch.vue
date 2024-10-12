@@ -43,6 +43,7 @@
   background-color: #111827;
 }
 </style>
+
 <template>
   <label :for="id" class="inline-flex items-center cursor-pointer">
     <label :for="id" class="container cursor-pointer">
@@ -59,6 +60,7 @@
     <span class="ms-2 text-sm text-gray-400">{{ prompt }}</span>
   </label>
 </template>
+
 <script setup>
 const props = defineProps({
   id: String,

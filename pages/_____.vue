@@ -13,19 +13,19 @@
   <NuxtLayout
     :name="layout"
     page="Developers"
-    header="Developer(s)"
-    title="Developer(s)"
+    header="Developers"
+    title="Developers"
   >
     <div class="py-12 mx-2 md:mx-0 a-center h-main-screen">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-gray-800 overflow-hidden shadow-sm rounded-lg">
           <div class="p-6 text-sm font-normal text-gray-100 dark:text-gray-100">
-            <div class="a-center pb-1">
+            <div class="a-center pb-2">
               <p class="text-center">Developers</p>
             </div>
             <div
               v-for="developer of developers"
-              class="border-b-2 border-gray-100 pb-1 a-center mt-2"
+              class="border-b-2 px-1 border-gray-100 pb-1 a-center mt-2"
             >
               <a
                 target="_blank"
@@ -51,8 +51,8 @@
                     />
                   </svg>
                 </div>
-                <div class="a-center w-[80px] pl-1">
-                  <span class="w-full text-left">{{ developer.name }}</span>
+                <div class="a-center w-[86px]">
+                  <span class="w-full text-center">{{ developer.name }}</span>
                 </div>
               </a>
             </div>

@@ -5,11 +5,13 @@
         >Copyright © {{ year }} Darkube. All rights reserved.</span
       >
       <span
-        class="block md:inline-flex font-semibold text-slate-100 text-xs uppercase my-2 md:my-0"
+        class="block md:inline-flex font-normal text-slate-100 text-xs uppercase my-2 md:my-0"
       >
-        <NuxtLink to="/_____">
-          <span>Developed by</span>
-        </NuxtLink>
+        <div class="flex justify-end">
+          <NuxtLink class="h-[16px]" to="/_____">
+            <span>Developed by</span>
+          </NuxtLink>
+        </div>
       </span>
     </div>
   </footer>

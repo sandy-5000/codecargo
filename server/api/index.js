@@ -1,3 +1,3 @@
 export default defineEventHandler(async () => {
-  return { message: 'Api [Darkube]' }
+  return { message: 'Api [CodeCargo]' }
 })

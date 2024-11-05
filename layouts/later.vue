@@ -1,9 +1,9 @@
 <template>
   <Head>
-    <Title>Darkube | {{ title || 'home' }}</Title>
+    <Title>CodeCargo | {{ title || 'home' }}</Title>
     <Meta
       name="description"
-      content="Welcome to DARKUBE - Your Ultimate Coding Hub!"
+      content="Welcome to CodeCargo - Your Ultimate Coding Hub!"
     />
   </Head>
   <body class="font-sans antialiased bg-gray-900">

@@ -21,7 +21,7 @@
             <h1
               class="text-center logo-text-bright uppercase font-semibold text-lg mx-20"
             >
-              Darkube Compiler
+              CodeCargo Compiler
             </h1>
           </div>
         </div>
@@ -34,7 +34,7 @@
           <p class="text-center text-sm font-normal pt-5">
             Welcome to our online compiler
             <span class="logo-text-bright text-md font-semibold"
-              >Darkube complier</span
+              >CodeCargo complier</span
             >, your one-stop solution for seamless coding experiences. Whether
             you're a seasoned developer or a curious learner, our platform
             empowers you to write, compile, and run code effortlessly, all

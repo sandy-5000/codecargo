@@ -1,9 +1,9 @@
 <template>
   <Head>
-    <Title>Darkube Chatroom | {{ title || 'Home' }}</Title>
+    <Title>CodeCargo Chatroom | {{ title || 'Home' }}</Title>
     <Meta
       name="description"
-      content="Welcome to DARKUBE Chatroom - Your Ultimate Coding Hub!"
+      content="Welcome to CodeCargo Chatroom - Your Ultimate Coding Hub!"
     />
   </Head>
   <body class="font-sans antialiased bg-gray-900">

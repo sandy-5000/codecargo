@@ -10,7 +10,7 @@
             <p class="mt-4 text-sm">
               Welcome to
               <span class="text-md font-semibold logo-text cursor-pointer"
-                >DARKUBE</span
+                >CodeCargo</span
               >
               - Your Ultimate Coding Hub!
             </p>

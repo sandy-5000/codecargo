@@ -1,9 +1,9 @@
 <template>
   <Head>
-    <Title>Darkube AskMe | {{ title || 'Home' }}</Title>
+    <Title>CodeCargo AskMe | {{ title || 'Home' }}</Title>
     <Meta
       name="description"
-      content="Welcome to DARKUBE AskMe - Your Ultimate Coding Hub!"
+      content="Welcome to CodeCargo AskMe - Your Ultimate Coding Hub!"
     />
   </Head>
   <body class="font-sans antialiased bg-gray-900">

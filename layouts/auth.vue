@@ -1,7 +1,7 @@
 <template>
   <Head>
-    <Title>Darkube | {{ title || 'Auth' }}</Title>
-    <Meta name="description" content="DARKUBE - Auth" />
+    <Title>CodeCargo | {{ title || 'Auth' }}</Title>
+    <Meta name="description" content="CodeCargo - Auth" />
   </Head>
   <body class="font-sans text-gray-900 antialiased">
     <div style="height: 100dvh" class="a-center bg-gray-900 dark:bg-gray-900">
@@ -13,7 +13,7 @@
           <NuxtLink to="/home" class="flex justify-start px-3">
             <ui-logo-glow class-name="w-[80px] mr-2"></ui-logo-glow>
             <div class="a-center">
-              <h1 class="text-2xl block font-normal logo-text">DARKUBE</h1>
+              <h1 class="text-2xl block font-normal logo-text">CodeCargo</h1>
             </div>
           </NuxtLink>
         </div>

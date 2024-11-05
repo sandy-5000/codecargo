@@ -1,10 +1,10 @@
-# Darkube
+# CodeCargo
 
-Welcome to DARKUBE - Your Ultimate Coding Hub!. Developed in Nuxt3
+Welcome to CodeCargo - Your Ultimate Coding Hub!. Developed in Nuxt3
 
 ## Website Link
 
-[Darkube](https://darkube.onrender.com/)
+[CodeCargo](https://CodeCargo.onrender.com/)
 
 ## Table of Contents
 
@@ -39,35 +39,35 @@ Welcome to DARKUBE - Your Ultimate Coding Hub!. Developed in Nuxt3
 
 1. Clone the repository:
 
-    ```sh
-    git clone https://github.com/sandy-5000/darkube.git
-    cd darkube
-    ```
+   ```sh
+   git clone https://github.com/sandy-5000/CodeCargo.git
+   cd CodeCargo
+   ```
 
 2. Install dependencies:
 
-    ```sh
-    npm install
-    ```
+   ```sh
+   npm install
+   ```
 
 3. Create a `.env` file in the `backend` directory and add the following environment variables:
 
-    ```env
-    MONGO_DB_URL=your_mongodb_connection_string
-    SALT=your_salt
-    ```
+   ```env
+   MONGO_DB_URL=your_mongodb_connection_string
+   SALT=your_salt
+   ```
 
 4. Start the server:
 
-    ```sh
-    npm run dev
-    ```
+   ```sh
+   npm run dev
+   ```
 
 5. To start the server in production:
 
-    ```sh
-    npm run build && npm start
-    ```
+   ```sh
+   npm run build && npm start
+   ```
 
 6. Open your browser and navigate to `http://localhost:3000`.
 
@@ -96,8 +96,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Thank you for using Darkube! If you have any questions or feedback, feel free to open an issue or contact us. Enjoy coding!
+Thank you for using CodeCargo! If you have any questions or feedback, feel free to open an issue or contact us. Enjoy coding!
 
 ---
 
-**Note**: Replace `https://github.com/sandy-5000/darkube.git` with your actual GitHub repository URL, and ensure you have set up the necessary environment variables and configurations for deployment on Render.
+**Note**: Replace `https://github.com/sandy-5000/CodeCargo.git` with your actual GitHub repository URL, and ensure you have set up the necessary environment variables and configurations for deployment on Render.

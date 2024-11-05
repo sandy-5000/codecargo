@@ -29,7 +29,7 @@ const props = defineProps({
   mtype: String,
 })
 const userType = {
-  Darkube: 'Darkube',
+  CodeCargo: 'CodeCargo',
   receive: 'Anonymous',
   sender: 'You',
 }

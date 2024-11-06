@@ -29,7 +29,7 @@
               <span class="font-semibold text-md logo-text-bright"
                 >Share Your Insights:</span
               >
-              Explore our blogging platform to share your knowledge,
+              ✨ Explore our blogging platform to share your knowledge,
               experiences, and discoveries. Your expertise could be the guiding
               light for someone else.
             </p>

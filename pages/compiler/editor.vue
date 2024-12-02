@@ -143,7 +143,9 @@ const swiftLanguage = (lang) => {
   let x = snippets[lang]
   let data = localStorage.getItem(lang)
   if (data) {
-    x = JSON.parse(data)
+    try {
+      x = JSON.parse(data)
+    } catch (e) {}
   }
   editor.contentWindow?.postMessage(
     {
